@@ -1,0 +1,691 @@
+!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DetailCRM - System zarządzania dla detailingu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --main-color: #68b037;
+            --secondary-color: #4c8329;
+            --gray-light: #f3f3f3;
+            --gray-medium: #e0e0e0;
+            --gray-dark: #555;
+            --blue-event: #4b85df;
+            --orange-event: #e59a2f;
+            --red-event: #e55151;
+            --green-event: #4caf50;
+        }
+
+        body {
+            background-color: #fff;
+            color: #333;
+        }
+
+        .navbar {
+            display: flex;
+            background-color: white;
+            border-bottom: 1px solid var(--gray-medium);
+            padding: 0;
+            position: fixed;
+            width: 100%;
+            height: 60px;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            color: var(--main-color);
+            font-size: 24px;
+            font-weight: bold;
+            border-right: 1px solid var(--gray-medium);
+            height: 100%;
+        }
+
+        .logo i {
+            margin-right: 8px;
+            color: var(--main-color);
+        }
+
+        .hamburger-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 100%;
+            cursor: pointer;
+            border-right: 1px solid var(--gray-medium);
+        }
+
+        .hamburger-btn i {
+            font-size: 20px;
+            color: #333;
+        }
+
+        .top-nav {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+            padding: 0 20px;
+        }
+
+        .top-title {
+            font-weight: bold;
+            font-size: 18px;
+            margin-right: 30px;
+        }
+
+        .date-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-right: 30px;
+        }
+
+        .date-input {
+            padding: 5px 10px;
+            border: 1px solid var(--gray-medium);
+            border-radius: 4px;
+        }
+
+        .view-select {
+            padding: 5px 10px;
+            border: 1px solid var(--gray-medium);
+            border-radius: 4px;
+            margin-right: 30px;
+        }
+
+        .filters {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-grow: 1;
+        }
+
+        .filter-tag {
+            background-color: var(--gray-light);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .filter-tag .close {
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+        .call-btn {
+            width: 40px;
+            height: 40px;
+            background-color: var(--main-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 10px;
+        }
+
+        .call-btn i {
+            color: white;
+            font-size: 18px;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            height: calc(100vh - 60px);
+            width: 250px;
+            background-color: white;
+            border-right: 1px solid var(--gray-medium);
+            transition: transform 0.3s ease;
+            z-index: 99;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-250px);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu > li {
+            border-bottom: 1px solid var(--gray-medium);
+        }
+
+        .sidebar-menu > li > a {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .sidebar-menu > li > a:hover,
+        .sidebar-menu > li > a.active {
+            background-color: var(--gray-light);
+            color: var(--main-color);
+        }
+
+        .sidebar-menu > li > a i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .sidebar-section {
+            padding: 10px 20px;
+            font-size: 12px;
+            color: var(--gray-dark);
+            background-color: var(--gray-light);
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        .main-content {
+            margin-top: 60px;
+            margin-left: 0;
+            transition: margin-left 0.3s ease;
+            padding: 20px;
+            height: calc(100vh - 60px);
+            overflow: auto;
+        }
+
+        .main-content.expanded {
+            margin-left: 250px;
+        }
+
+        .calendar {
+            border: 1px solid var(--gray-medium);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .calendar-header {
+            display: flex;
+            background-color: var(--gray-light);
+            border-bottom: 1px solid var(--gray-medium);
+        }
+
+        .calendar-col-header {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+            border-right: 1px solid var(--gray-medium);
+        }
+
+        .calendar-col-header:last-child {
+            border-right: none;
+        }
+
+        .calendar-date {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--gray-light);
+            padding: 5px;
+            font-weight: bold;
+            color: var(--gray-dark);
+            border-right: 1px solid var(--gray-medium);
+            border-bottom: 1px solid var(--gray-medium);
+        }
+
+        .calendar-grid {
+            display: flex;
+            height: calc(100vh - 180px);
+        }
+
+        .calendar-time-col {
+            width: 60px;
+            border-right: 1px solid var(--gray-medium);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .time-slot {
+            height: 60px;
+            border-bottom: 1px solid var(--gray-medium);
+            text-align: right;
+            padding: 0 5px;
+            font-size: 12px;
+            position: relative;
+            top: -10px;
+        }
+
+        .calendar-content {
+            display: flex;
+            flex: 1;
+        }
+
+        .calendar-col {
+            flex: 1;
+            position: relative;
+            border-right: 1px solid var(--gray-medium);
+            min-width: 120px;
+        }
+
+        .calendar-col:last-child {
+            border-right: none;
+        }
+
+        .hour-grid {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+        }
+
+        .hour-line {
+            position: absolute;
+            height: 1px;
+            left: 0;
+            right: 0;
+            background-color: var(--gray-medium);
+        }
+
+        .appointment {
+            position: absolute;
+            left: 5px;
+            right: 5px;
+            border-radius: 4px;
+            padding: 5px;
+            font-size: 12px;
+            color: white;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .appointment.blue {
+            background-color: var(--blue-event);
+        }
+
+        .appointment.orange {
+            background-color: var(--orange-event);
+        }
+
+        .appointment.red {
+            background-color: var(--red-event);
+        }
+
+        .appointment.green {
+            background-color: var(--green-event);
+        }
+
+        .appointment-name {
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .appointment-time {
+            font-size: 11px;
+            margin-top: 2px;
+        }
+
+        .btn-primary {
+            background-color: var(--main-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--secondary-color);
+        }
+    </style>
+</head>
+<body>
+<div class="navbar">
+    <div class="logo">
+        <i class="fas fa-car-wash"></i> DetailCRM
+    </div>
+    <div class="hamburger-btn" id="sidebar-toggle">
+        <i class="fas fa-bars"></i>
+    </div>
+    <div class="top-nav">
+        <div class="top-title">REZERWACJE</div>
+        <div class="date-nav">
+            <button class="btn-nav"><i class="fas fa-chevron-left"></i></button>
+            <input type="date" class="date-input" value="2023-01-09">
+            <button class="btn-nav"><i class="fas fa-chevron-right"></i></button>
+        </div>
+        <select class="view-select">
+            <option>Dzień</option>
+            <option>Tydzień</option>
+            <option>Miesiąc</option>
+        </select>
+        <div class="filters">
+            <div class="filter-tag">
+                Ewa Nowak <span class="close">×</span>
+            </div>
+            <div class="filter-tag">
+                Janek Kowalski <span class="close">×</span>
+            </div>
+            <div class="filter-tag">
+                Kamila Kowalska <span class="close">×</span>
+            </div>
+            <div class="filter-tag">
+                Piotr Bylica <span class="close">×</span>
+            </div>
+            <div class="filter-tag">
+                Weronika Rożek <span class="close">×</span>
+            </div>
+        </div>
+        <div class="call-btn">
+            <i class="fas fa-phone"></i>
+        </div>
+    </div>
+</div>
+
+<div class="sidebar" id="sidebar">
+    <ul class="sidebar-menu">
+        <li><a href="#" class="active"><i class="fas fa-calendar-alt"></i> Kalendarz</a></li>
+        <li><a href="#"><i class="fas fa-clipboard-list"></i> Protokoły</a></li>
+        <li><a href="#"><i class="fas fa-warehouse"></i> Magazyn</a></li>
+        <li><a href="#"><i class="fas fa-file-invoice-dollar"></i> Księgowość</a></li>
+        <li><a href="#"><i class="fas fa-cog"></i> Ustawienia</a></li>
+    </ul>
+    <div class="sidebar-section">KATEGORIE</div>
+    <ul class="sidebar-menu">
+        <li><a href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li><a href="#"><i class="fas fa-users"></i> Klienci</a></li>
+        <li><a href="#"><i class="fas fa-car"></i> Pojazdy</a></li>
+        <li><a href="#"><i class="fas fa-tasks"></i> Zadania</a></li>
+    </ul>
+</div>
+
+<div class="main-content" id="main-content">
+    <div class="calendar">
+        <div class="calendar-header">
+            <div class="calendar-date" style="width: 60px;">
+                09.01.2023<br>PONIEDZIAŁEK
+            </div>
+            <div class="calendar-col-header">EWA NOWAK</div>
+            <div class="calendar-col-header">JANEK KOWALSKI</div>
+            <div class="calendar-col-header">KAMILA KOWALSKA</div>
+            <div class="calendar-col-header">PIOTR BYLICA</div>
+            <div class="calendar-col-header">WERONIKA ROŻEK</div>
+        </div>
+        <div class="calendar-grid">
+            <div class="calendar-time-col">
+                <div class="time-slot">08:00</div>
+                <div class="time-slot">09:00</div>
+                <div class="time-slot">10:00</div>
+                <div class="time-slot">11:00</div>
+                <div class="time-slot">12:00</div>
+                <div class="time-slot">13:00</div>
+                <div class="time-slot">14:00</div>
+                <div class="time-slot">15:00</div>
+                <div class="time-slot">16:00</div>
+                <div class="time-slot">17:00</div>
+            </div>
+            <div class="calendar-content">
+                <!-- Ewa Nowak column -->
+                <div class="calendar-col">
+                    <div class="hour-grid">
+                        <div class="hour-line" style="top: 60px;"></div>
+                        <div class="hour-line" style="top: 120px;"></div>
+                        <div class="hour-line" style="top: 180px;"></div>
+                        <div class="hour-line" style="top: 240px;"></div>
+                        <div class="hour-line" style="top: 300px;"></div>
+                        <div class="hour-line" style="top: 360px;"></div>
+                        <div class="hour-line" style="top: 420px;"></div>
+                        <div class="hour-line" style="top: 480px;"></div>
+                        <div class="hour-line" style="top: 540px;"></div>
+                    </div>
+                    <div class="appointment green" style="top: 30px; height: 60px;">
+                        <div class="appointment-name">Karolina Burczak</div>
+                        <div class="appointment-time">09:00 - 10:00</div>
+                    </div>
+                </div>
+
+                <!-- Janek Kowalski column -->
+                <div class="calendar-col">
+                    <div class="hour-grid">
+                        <div class="hour-line" style="top: 60px;"></div>
+                        <div class="hour-line" style="top: 120px;"></div>
+                        <div class="hour-line" style="top: 180px;"></div>
+                        <div class="hour-line" style="top: 240px;"></div>
+                        <div class="hour-line" style="top: 300px;"></div>
+                        <div class="hour-line" style="top: 360px;"></div>
+                        <div class="hour-line" style="top: 420px;"></div>
+                        <div class="hour-line" style="top: 480px;"></div>
+                        <div class="hour-line" style="top: 540px;"></div>
+                    </div>
+                    <div class="appointment blue" style="top: 150px; height: 60px;">
+                        <div class="appointment-name">Weronika Marczewska</div>
+                        <div class="appointment-time">09:00 - 11:00</div>
+                    </div>
+                </div>
+
+                <!-- Kamila Kowalska column -->
+                <div class="calendar-col">
+                    <div class="hour-grid">
+                        <div class="hour-line" style="top: 60px;"></div>
+                        <div class="hour-line" style="top: 120px;"></div>
+                        <div class="hour-line" style="top: 180px;"></div>
+                        <div class="hour-line" style="top: 240px;"></div>
+                        <div class="hour-line" style="top: 300px;"></div>
+                        <div class="hour-line" style="top: 360px;"></div>
+                        <div class="hour-line" style="top: 420px;"></div>
+                        <div class="hour-line" style="top: 480px;"></div>
+                        <div class="hour-line" style="top: 540px;"></div>
+                    </div>
+                    <div class="appointment orange" style="top: 30px; height: 45px;">
+                        <div class="appointment-name">Jan Matejko</div>
+                        <div class="appointment-time">08:00 - 08:45</div>
+                    </div>
+                    <div class="appointment orange" style="top: 90px; height: 45px;">
+                        <div class="appointment-name">Krystian Koralik</div>
+                        <div class="appointment-time">09:00 - 09:45</div>
+                    </div>
+                    <div class="appointment orange" style="top: 150px; height: 45px;">
+                        <div class="appointment-name">Roman Rzeszutko</div>
+                        <div class="appointment-time">10:00 - 10:45</div>
+                    </div>
+                    <div class="appointment orange" style="top: 210px; height: 60px;">
+                        <div class="appointment-name">Kamil Bednarczyk</div>
+                        <div class="appointment-time">11:00 - 12:00</div>
+                    </div>
+                </div>
+
+                <!-- Piotr Bylica column -->
+                <div class="calendar-col">
+                    <div class="hour-grid">
+                        <div class="hour-line" style="top: 60px;"></div>
+                        <div class="hour-line" style="top: 120px;"></div>
+                        <div class="hour-line" style="top: 180px;"></div>
+                        <div class="hour-line" style="top: 240px;"></div>
+                        <div class="hour-line" style="top: 300px;"></div>
+                        <div class="hour-line" style="top: 360px;"></div>
+                        <div class="hour-line" style="top: 420px;"></div>
+                        <div class="hour-line" style="top: 480px;"></div>
+                        <div class="hour-line" style="top: 540px;"></div>
+                    </div>
+                    <div class="appointment orange" style="top: 270px; height: 60px;">
+                        <div class="appointment-name">Lucyna Krawczyk</div>
+                        <div class="appointment-time">12:00 - 13:00</div>
+                    </div>
+                    <div class="appointment orange" style="top: 345px; height: 45px;">
+                        <div class="appointment-name">Piotr Beniuk</div>
+                        <div class="appointment-time">13:00 - 13:45</div>
+                    </div>
+                    <div class="appointment orange" style="top: 405px; height: 75px;">
+                        <div class="appointment-name">Remigiusz Jelonek</div>
+                        <div class="appointment-time">14:00 - 15:15</div>
+                    </div>
+                </div>
+
+                <!-- Weronika Rożek column -->
+                <div class="calendar-col">
+                    <div class="hour-grid">
+                        <div class="hour-line" style="top: 60px;"></div>
+                        <div class="hour-line" style="top: 120px;"></div>
+                        <div class="hour-line" style="top: 180px;"></div>
+                        <div class="hour-line" style="top: 240px;"></div>
+                        <div class="hour-line" style="top: 300px;"></div>
+                        <div class="hour-line" style="top: 360px;"></div>
+                        <div class="hour-line" style="top: 420px;"></div>
+                        <div class="hour-line" style="top: 480px;"></div>
+                        <div class="hour-line" style="top: 540px;"></div>
+                    </div>
+                    <div class="appointment red" style="top: 30px; height: 45px;">
+                        <div class="appointment-name">Lidia Barecka</div>
+                        <div class="appointment-time">09:00 - 10:00</div>
+                    </div>
+                    <div class="appointment blue" style="top: 120px; height: 60px;">
+                        <div class="appointment-name">Dominika Jaskier</div>
+                        <div class="appointment-time">10:15 - 11:30</div>
+                    </div>
+                    <div class="appointment blue" style="top: 270px; height: 45px;">
+                        <div class="appointment-name">Paulina Kotak</div>
+                        <div class="appointment-time">12:00 - 13:00</div>
+                    </div>
+                    <div class="appointment green" style="top: 435px; height: 60px;">
+                        <div class="appointment-name">Henryka Malarz</div>
+                        <div class="appointment-time">15:00 - 16:00</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="protokoly" class="page-content hidden">
+    <h2>Protokoły</h2>
+    <div class="protocols-wrapper">
+        <div class="filters-bar">
+            <input type="text" placeholder="Szukaj protokołu...">
+            <button class="btn-primary">Nowy protokół</button>
+        </div>
+        <table class="protocols-table">
+            <thead>
+            <tr>
+                <th>Nr</th>
+                <th>Data</th>
+                <th>Klient</th>
+                <th>Pojazd</th>
+                <th>Usługa</th>
+                <th>Status</th>
+                <th>Akcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>PRO-001</td>
+                <td>09.01.2023</td>
+                <td>Jan Kowalski</td>
+                <td>BMW X5 (ABC 1234)</td>
+                <td>Pełny detailing</td>
+                <td><span class="status-completed">Zakończony</span></td>
+                <td>
+                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                    <button class="btn-icon"><i class="fas fa-print"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td>PRO-002</td>
+                <td>08.01.2023</td>
+                <td>Anna Nowak</td>
+                <td>Audi A4 (DEF 5678)</td>
+                <td>Zabezpieczenie lakieru</td>
+                <td><span class="status-pending">W trakcie</span></td>
+                <td>
+                    <button class="btn-icon"><i class="fas fa-eye"></i></button>
+                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                    <button class="btn-icon"><i class="fas fa-print"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div id="magazyn" class="page-content hidden">
+    <h2>Magazyn</h2>
+    <div class="warehouse-wrapper">
+        <div class="filters-bar">
+            <input type="text" placeholder="Szukaj produktu...">
+            <button class="btn-primary">Dodaj produkt</button>
+            <button class="btn-primary">Zamówienia</button>
+        </div>
+        <table class="warehouse-table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nazwa produktu</th>
+                <th>Kategoria</th>
+                <th>Ilość</th>
+                <th>Stan</th>
+                <th>Cena zakupu</th>
+                <th>Akcja</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>P001</td>
+                <td>Wosk ochronny premium</td>
+                <td>Woski</td>
+                <td>15</td>
+                <td><span class="status-ok">OK</span></td>
+                <td>75.00 zł</td>
+                <td>
+                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                    <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td>P002</td>
+                <td>Szampon samochodowy</td>
+                <td>Czyszczenie</td>
+                <td>8</td>
+                <td><span class="status-warning">Niski</span></td>
+                <td>42.50 zł</td>
+                <td>
+                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                    <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+            <tr>
+                <td>P003</td>
+                <td>Ceramiczne powłoki ochronne</td>
+                <td>Powłoki</td>
+                <td>2</td>
+                <td><span class="status-critical">Krytyczny</span></td>
+                <td>250.00 zł</td>
+                <td>
+                    <button class="btn-icon"><i class="fas fa-edit"></i></button>
+                    <button class="btn-icon"><i class="fas fa-trash"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

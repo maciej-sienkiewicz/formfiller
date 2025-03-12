@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Boczny</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Panel główny -->
+<div id="main-container" class="container" style="display: none;">
+    <!-- Menu boczne -->
+    <div class="sidebar" id="menu-container">
+        <div class="menu-item" id="override-reference-numbers">
+            <span class="icon">📝</span>
+            <span class="label">Nadpisz numery ref.</span>
+        </div>
+        <div class="menu-item" id="product-configuration">
+            <span class="icon">🛠️</span>
+            <span class="label">Edytuj etykiety</span>
+        </div>
+        <div class="menu-item" id="alert-issue">
+            <span class="icon">⚠️</span>
+            <span class="label">Zgłoś usterkę</span>
+        </div>
+    </div>
+
+    <!-- Główna zawartość -->
+    <div class="content" id="content">
+        <div class="function-descriptions">
+            <h3>Opis funkcji:</h3>
+            <ul>
+                <li>
+                    <strong>Nadpisz numery ref.</strong>: Pozwala na nadpisanie numerów referencyjnych poprzez wprowadzenie własnych ustawień.
+                </li>
+                <li>
+                    <strong>Konfiguruj etykiety produktów</strong>: Umożliwia konfigurację etykiet produktów oraz przypisanie do nich numerów referencyjnych.
+                </li>
+                <li>
+                    <strong>Alert Issue</strong>: Jeśli napotkasz problem, użyj tej opcji, aby zgłosić problem. Wypełnij formularz, a my szybko się nim zajmiemy.
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script type="module" src="./js/main.js"></script>
+
+</body>
+</html>

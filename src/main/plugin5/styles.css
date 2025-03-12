@@ -1,0 +1,727 @@
+/* Styl domyślny dla całej strony */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+/* Główny kontener */
+.container {
+    display: flex;
+    height: 100vh; /* Wypełnia całą wysokość okna */
+    overflow: hidden;
+}
+
+
+/* Lewy pasek boczny */
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    width: 60px;
+    background-color: #ffffff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
+    border-right: 1px solid #eaeaea;
+    padding: 10px 0;
+}
+
+/* Styl domyślny przycisku */
+.menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 15px 0;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Zmiana stylu po najechaniu */
+.menu-item:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Styl dla aktywnego przycisku */
+.menu-item.active {
+    background-color: #d1e7ff; /* Jasnoniebieskie tło */
+    color: #0056b3; /* Niebieski tekst */
+}
+
+/* Styl ikon w menu */
+.icon {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+/* Styl etykiet pod ikonami */
+.label {
+    font-size: 12px;
+    text-align: center;
+}
+
+/* Szary kontener na treść */
+.content {
+    flex-grow: 1; /* Wypełnia pozostałą przestrzeń */
+    background-color: #f1f1f1; /* Szary odcień */
+    display: flex;
+    flex-direction: column; /* Układ kolumnowy */
+    align-items: center; /* Wyśrodkowanie poziome */
+    justify-content: start; /* Elementy zaczynają się od góry */
+    padding: 20px;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+/* Styl tekstu w kontenerze */
+.content p {
+    margin: 10px 0; /* Odstęp między liniami tekstu */
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+}
+
+/* Spinner */
+.spinner {
+    border: 4px solid #f3f3f3; /* Szary pasek obramowania */
+    border-top: 4px solid #3498db; /* Niebieski pasek dla animacji */
+    border-radius: 50%; /* Zaokrąglone rogi */
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite; /* Animacja obrotu */
+    margin: 10px 0;
+}
+
+/* Definicja animacji dla spinnera */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+#do-a-prank-button .icon {
+    font-size: 24px;
+    color: #ff9800; /* Pomarańczowy kolor emotki */
+}
+
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    background: white;
+    padding: 20px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    text-align: center;
+    margin: auto;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+}
+
+.login-container input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-container button {
+    width: 100%;
+    padding: 10px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-container button:hover {
+    background: #0056b3;
+}
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+
+/* Ogólny wygląd formularza */
+.form-group {
+    margin-bottom: 20px; /* Odpowiedni odstęp między elementami */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Wycentrowanie elementów */
+    width: 100%;
+    max-width: 450px; /* Maksymalna szerokość dla lepszego UX */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Stylizacja etykiet */
+label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 6px;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+    width: 100%;
+}
+
+/* Stylizacja pola wieloliniowego */
+textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: "Inter", sans-serif;
+    resize: none;
+    line-height: 1.5;
+    overflow: hidden;
+    text-align: left;
+}
+
+/* Dynamiczne zwiększanie wysokości textarea */
+textarea:focus {
+    border-color: #007bff;
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.15);
+    outline: none;
+}
+
+/* Stylizacja selektów */
+select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    background-color: #fff;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    font-family: "Inter", sans-serif;
+}
+
+/* Efekt focus na select */
+select:focus {
+    border-color: #007bff;
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.15);
+    outline: none;
+}
+
+/* Stylizacja przycisków */
+button {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+}
+
+button:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+}
+
+button:active {
+    background: #004494;
+    transform: translateY(0);
+}
+
+/* Stylowanie odpowiedzi w osobnym kontenerze */
+.response-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 16px;
+    background: #f8f8f8;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    font-family: "Inter", sans-serif;
+    line-height: 1.6;
+    color: #333;
+    text-align: left;
+}
+
+/* Obsługa pogrubienia, kursywy i nagłówków */
+.response-container h1,
+.response-container h2,
+.response-container h3 {
+    color: #222;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.response-container b,
+.response-container strong {
+    font-weight: bold;
+    color: #000;
+}
+
+.response-container i,
+.response-container em {
+    font-style: italic;
+    color: #555;
+}
+
+/* Obsługa list */
+.response-container ul,
+.response-container ol {
+    margin: 10px 0;
+    padding-left: 20px;
+}
+
+.response-container ul li,
+.response-container ol li {
+    margin-bottom: 5px;
+}
+
+/* Wyróżnienie cytatów */
+.response-container blockquote {
+    margin: 10px 0;
+    padding-left: 10px;
+    border-left: 3px solid #007bff;
+    color: #555;
+    font-style: italic;
+}
+
+/* Obsługa wcięć */
+.response-container p {
+    text-indent: 20px;
+    margin-bottom: 10px;
+}
+
+/* Efekt wypisywania tekstu */
+.typing-effect {
+    font-size: 15px;
+    font-family: "Courier New", monospace;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #007bff;
+    animation: typing 2s steps(40, end), blink 0.8s infinite;
+    padding: 12px 18px;
+    background: #f8f8f8;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+    max-width: 90%;
+    text-align: left;
+}
+
+/* Animacja pisania */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+/* Animacja migającego kursora */
+@keyframes blink {
+    50% { border-color: transparent }
+}
+
+/* Ustawienie responsywności */
+@media (max-width: 600px) {
+    .response-container {
+        max-width: 100%;
+    }
+}
+
+/* Kontener dla przycisków – układ poziomy */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Odstęp między przyciskami */
+    margin-top: 15px;
+}
+
+/* Podstawowy styl przycisku */
+button {
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    font-family: "Inter", sans-serif;
+    text-align: center;
+    width: auto;
+}
+
+/* Przycisk "Wyślij" – główny niebieski */
+.alert-issue-button {
+    background: #007bff;
+    color: white;
+}
+
+.alert-issue-button:hover {
+    background: #0056b3;
+    transform: translateY(-1px);
+}
+
+.alert-issue-button:active {
+    background: #004494;
+    transform: translateY(0);
+}
+
+/* Przycisk "Kopiuj" – inny kolor (zielony) */
+.copy-button {
+    background: #28a745;
+    color: white;
+}
+
+.copy-button:hover {
+    background: #218838;
+    transform: translateY(-1px);
+}
+
+.copy-button:active {
+    background: #1e7e34;
+    transform: translateY(0);
+}
+
+/* Responsywność – zmniejszenie odstępu między przyciskami na małych ekranach */
+@media (max-width: 600px) {
+    .button-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+
+/* Ensure consistent box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* SMS Sender Form – components on the plugin's normal background */
+#sms-form-container {
+    width: 100%;
+    max-width: 100%;
+    padding: 10px;
+    font-family: "Inter", sans-serif;
+}
+
+#sms-form-container .form-group {
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.editable-field {
+    position: relative;
+    width: 100%;
+}
+
+.editable-field input {
+    width: 100%;
+    padding: 8px 40px 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Stylizacja przycisków (zarówno edycja, jak i dodawanie/usuwanie) */
+.edit-btn,
+.add-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    font-size: 16px;
+    color: #6c757d;
+    cursor: pointer;
+    width: 24px;
+    text-align: center;
+    padding: 0;
+    line-height: 1;
+}
+
+.edit-btn:hover,
+.edit-btn:active,
+.edit-btn:focus,
+.add-btn:hover,
+.add-btn:active,
+.add-btn:focus {
+    outline: none;
+    transform: translateY(-50%);
+    color: #6c757d;
+}
+
+/* Stylizacja standardowych pól */
+.form-control {
+    width: 100%;
+    padding: 8px 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#sms-response-container {
+    margin-top: 20px;
+    padding: 10px;
+    font-family: "Inter", sans-serif;
+    line-height: 1.6;
+    color: #333;
+    text-align: left;
+}
+
+.send-btn {
+    background: #007bff;
+    color: #fff;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s ease;
+}
+
+.send-btn:hover:not(:disabled) {
+    background: #0056b3;
+}
+
+.send-btn:active:not(:disabled) {
+    background: #004494;
+}
+
+.send-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Container for response action buttons */
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Template preview styling */
+#template-preview {
+    margin-top: 8px;
+    padding: 10px;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #555;
+    background-color: #f9f9f9;
+    white-space: pre-wrap;
+}
+
+/* SMS response container styling */
+#sms-response-container {
+    margin-top: 20px;
+    padding: 15px;
+    font-family: "Inter", sans-serif;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* Reset and box sizing */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for instructions */
+#instructions-container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 15px;
+    font-family: "Inter", sans-serif;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* Heading styling */
+#instructions-container h3 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Ordered list styling */
+#instructions-container ol {
+    margin: 10px 0 15px 20px;
+    color: #555;
+}
+
+#instructions-container ol li {
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+/* Primary button styling */
+.primary-btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.primary-btn:hover {
+    background-color: #0056b3;
+}
+
+.primary-btn:active {
+    background-color: #004494;
+}
+
+/* Styl switcha */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: #fff;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #007bff;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Stylizacja dodatkowego kontenera tłumaczenia */
+/* Minimalne odstępy dla kontenera tłumaczenia – bez dodatkowych ramek */
+#translation-container {
+    margin-top: 10px;
+    width: 100%;
+    display: block;
+}
+
+/* Stylizacja kontenera wewnętrznego dla przycisku i etykiety tłumaczenia */
+#translation-controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+#translation-controls label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Przycisk tłumaczenia – tak jak pozostałe przyciski */
+#translation-controls .alert-issue-button {
+    width: auto;
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 6px;
+    margin-top: 5px;
+}
+
+/* Stylizacja kontenera na odpowiedź z tłumaczenia – bez dodatkowych ramek */
+#translation-response-container {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+
+/* Stylizacja przycisku "Przetłumacz" */
+#translate-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+    background-color: #6c757d; /* mniej jaskrawy kolor */
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#translate-btn:hover {
+    background-color: #5a6268;
+}
+
+/* Ukryty domyślnie kontener z odpowiedzią z tłumaczenia */
+#translation-response-container {
+    display: none;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+}
+
+#translation-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+

@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "Potent(AI)",
+  "version": "1.0",
+  "description": "To nie tyko automatyzacja - to wyższy komfort pracy",
+  "icons": {
+    "16": "icons/icon16.png",
+    "64": "icons/icon64.png",
+    "128": "icons/icon128.png"
+  },
+  "permissions": ["activeTab", "scripting", "tabs", "storage"],
+  "host_permissions": [
+    "http://localhost:20266/*"
+  ],
+  "action": {
+    "default_title": "Pokaż/Ukryj Potent(AI)",
+    "default_icon": "icons/icon128.png"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["sidebar.html", "styles.css", "script.js", "fillForm.js"],
+      "matches": ["<all_urls>"]
+    }
+  ]
+}

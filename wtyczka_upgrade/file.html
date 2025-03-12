@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Profil Kandydata</title>
+    <style>
+        /* Podstawowy reset i style globalne */
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        form {
+            background: #fff;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 30px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        fieldset {
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #fafafa;
+        }
+        legend {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #555;
+            padding: 0 10px;
+        }
+        /* Układ w wierszach i kolumnach */
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+        .form-group:last-child {
+            margin-right: 0;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: border-color 0.3s;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="date"]:focus {
+            border-color: #007bff;
+        }
+        /* Style dla checkboxów */
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .checkbox-group > div {
+            margin-right: 15px;
+        }
+        /* Dynamiczne sekcje */
+        .dynamic-section .form-row {
+            margin-bottom: 10px;
+        }
+        /* Przyciski */
+        .button-group {
+            text-align: right;
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            background: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 0.9em;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .add-button {
+            background: #28a745;
+        }
+        .add-button:hover {
+            background: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Profil Kandydata</h1>
+<form id="candidateForm">
+    <!-- Dane osobowe -->
+    <fieldset>
+        <legend>Dane osobowe</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="firstName">Imię *</label>
+                <input type="text" id="firstName" name="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Nazwisko *</label>
+                <input type="text" id="lastName" name="lastName" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="citizenship">Obywatelstwo *</label>
+                <input type="text" id="citizenship" name="citizenship" required>
+            </div>
+            <div class="form-group">
+                <label for="birthDate">Data urodzenia *</label>
+                <input type="date" id="birthDate" name="birthDate" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="birthPlace">Miejsce urodzenia *</label>
+                <input type="text" id="birthPlace" name="birthPlace" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="phoneCode">Kod kraju (telefon) *</label>
+                <input type="text" id="phoneCode" name="phoneCode" required>
+            </div>
+            <div class="form-group">
+                <label for="phoneNumber">Numer telefonu *</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="building">Numer budynku *</label>
+                <input type="text" id="building" name="building" required>
+            </div>
+            <div class="form-group">
+                <label for="local">Numer lokalu</label>
+                <input type="text" id="local" name="local">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="street">Ulica *</label>
+                <input type="text" id="street" name="street" required>
+            </div>
+            <div class="form-group">
+                <label for="postalCode">Kod pocztowy</label>
+                <input type="text" id="postalCode" name="postalCode">
+            </div>
+            <div class="form-group">
+                <label for="city">Miasto *</label>
+                <input type="text" id="city" name="city" required>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- Języki -->
+    <fieldset>
+        <legend>Języki</legend>
+        <div id="languagesContainer" class="dynamic-section">
+            <div class="form-row language">
+                <div class="form-group">
+                    <label for="languageName0">Nazwa języka *</label>
+                    <input type="text" id="languageName0" name="languages[0][name]" required>
+                </div>
+                <div class="form-group">
+                    <label for="languageLevel0">Poziom znajomości *</label>
+                    <input type="text" id="languageLevel0" name="languages[0][languageLevel]" required>
+                </div>
+            </div>
+        </div>
+        <div class="button-group">
+            <button type="button" class="add-button" onclick="addLanguage()">Dodaj język</button>
+        </div>
+    </fieldset>
+
+    <!-- Elastyczność -->
+    <fieldset>
+        <legend>Elastyczność</legend>
+        <div class="form-row">
+            <div class="form-group">
+                <label>Prawo jazdy *</label>
+                <div class="checkbox-group">
+                    <div>
+                        <input type="checkbox" id="driverLicenceA" name="driverLicence[]" value="A">
+                        <label for="driverLicenceA">A</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="driverLicenceB" name="driverLicence[]" value="B">
+                        <label for="driverLicenceB">B</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="driverLicenceC" name="driverLicence[]" value="C">
+                        <label for="driverLicenceC">C</label>
+                    </div>
+                    <div>
+                        <input type="checkbox" id="driverLicenceD" name="driverLicence[]" value="D">
+                        <label for="driverLicenceD">D</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+
+    <!-- Umiejętności kluczowe -->
+    <fieldset>
+        <legend>Umiejętności kluczowe</legend>
+        <div id="keySkillsContainer" class="dynamic-section">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="keySkill0">Umiejętność</label>
+                    <input type="text" id="keySkill0" name="keySkills[0][name]">
+                </div>
+            </div>
+        </div>
+        <div class="button-group">
+            <button type="button" class="add-button" onclick="addKeySkill()">Dodaj umiejętność</button>
+        </div>
+    </fieldset>
+
+    <!-- Edukacja -->
+    <fieldset>
+        <legend>Edukacja</legend>
+        <div id="educationContainer" class="dynamic-section">
+            <div class="education-entry">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="educationFromTo0">Okres nauki (od - do)</label>
+                        <input type="text" id="educationFromTo0" name="education[0][fromTo]">
+                    </div>
+                    <div class="form-group">
+                        <label for="educationSchool0">Szkoła</label>
+                        <input type="text" id="educationSchool0" name="education[0][school]">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="educationProfession0">Kierunek/Specjalizacja</label>
+                        <input type="text" id="educationProfession0" name="education[0][profession]">
+                    </div>
+                    <div class="form-group">
+                        <label for="educationTypeEng0">Typ szkoły (ENG)</label>
+                        <input type="text" id="educationTypeEng0" name="education[0][typeOfSchoolEng]">
+                    </div>
+                    <div class="form-group">
+                        <label for="educationTypeDe0">Typ szkoły (DE)</label>
+                        <input type="text" id="educationTypeDe0" name="education[0][typeOfSchoolDe]">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="button-group">
+            <button type="button" class="add-button" onclick="addEducation()">Dodaj edukację</button>
+        </div>
+    </fieldset>
+
+    <!-- Doświadczenie zawodowe -->
+    <fieldset>
+        <legend>Doświadczenie zawodowe</legend>
+        <div id="experienceContainer" class="dynamic-section">
+            <div class="experience-entry">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expDateFrom0">Data rozpoczęcia *</label>
+                        <input type="date" id="expDateFrom0" name="professionalExperience[0][dateFrom]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expDateTo0">Data zakończenia *</label>
+                        <input type="date" id="expDateTo0" name="professionalExperience[0][dateTo]" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expCountry0">Kraj *</label>
+                        <input type="text" id="expCountry0" name="professionalExperience[0][country]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expCity0">Miasto *</label>
+                        <input type="text" id="expCity0" name="professionalExperience[0][city]" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expCompany0">Firma *</label>
+                        <input type="text" id="expCompany0" name="professionalExperience[0][company]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expProfession0">Stanowisko *</label>
+                        <input type="text" id="expProfession0" name="professionalExperience[0][profession]" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expProfessionDe0">Stanowisko (DE) *</label>
+                        <input type="text" id="expProfessionDe0" name="professionalExperience[0][professionDe]" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expProfessionEng0">Stanowisko (ENG) *</label>
+                        <input type="text" id="expProfessionEng0" name="professionalExperience[0][professionEng]" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Zadania (DE)</label>
+                        <div id="tasksDeContainer0" class="dynamic-section">
+                            <div class="form-group">
+                                <input type="text" id="expTaskDe0" name="professionalExperience[0][experienceTaskDe][0][name]">
+                            </div>
+                        </div>
+                        <button type="button" class="add-button" onclick="addTask('tasksDeContainer0', 'professionalExperience[0][experienceTaskDe]')">Dodaj zadanie (DE)</button>
+                    </div>
+                    <div class="form-group">
+                        <label>Zadania (ENG)</label>
+                        <div id="tasksEngContainer0" class="dynamic-section">
+                            <div class="form-group">
+                                <input type="text" id="expTaskEng0" name="professionalExperience[0][experienceTaskEng][0][name]">
+                            </div>
+                        </div>
+                        <button type="button" class="add-button" onclick="addTask('tasksEngContainer0', 'professionalExperience[0][experienceTaskEng]')">Dodaj zadanie (ENG)</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="button-group">
+            <button type="button" class="add-button" onclick="addExperience()">Dodaj doświadczenie</button>
+        </div>
+    </fieldset>
+
+    <div class="button-group">
+        <button type="submit">Wyślij</button>
+    </div>
+</form>
+
+<script>
+    let languageCount = 1;
+    function addLanguage() {
+        const container = document.getElementById('languagesContainer');
+        const div = document.createElement('div');
+        div.className = 'form-row language';
+        div.innerHTML = `
+      <div class="form-group">
+        <label for="languageName${languageCount}">Nazwa języka *</label>
+        <input type="text" id="languageName${languageCount}" name="languages[${languageCount}][name]" required>
+      </div>
+      <div class="form-group">
+        <label for="languageLevel${languageCount}">Poziom znajomości *</label>
+        <input type="text" id="languageLevel${languageCount}" name="languages[${languageCount}][languageLevel]" required>
+      </div>
+    `;
+        container.appendChild(div);
+        languageCount++;
+    }
+
+    let keySkillCount = 1;
+    function addKeySkill() {
+        const container = document.getElementById('keySkillsContainer');
+        const div = document.createElement('div');
+        div.className = 'form-row';
+        div.innerHTML = `
+      <div class="form-group">
+        <label for="keySkill${keySkillCount}">Umiejętność</label>
+        <input type="text" id="keySkill${keySkillCount}" name="keySkills[${keySkillCount}][name]">
+      </div>
+    `;
+        container.appendChild(div);
+        keySkillCount++;
+    }
+
+    let educationCount = 1;
+    function addEducation() {
+        const container = document.getElementById('educationContainer');
+        const div = document.createElement('div');
+        div.className = 'education-entry';
+        div.innerHTML = `
+      <div class="form-row">
+        <div class="form-group">
+          <label for="educationFromTo${educationCount}">Okres nauki (od - do)</label>
+          <input type="text" id="educationFromTo${educationCount}" name="education[${educationCount}][fromTo]">
+        </div>
+        <div class="form-group">
+          <label for="educationSchool${educationCount}">Szkoła</label>
+          <input type="text" id="educationSchool${educationCount}" name="education[${educationCount}][school]">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="educationProfession${educationCount}">Kierunek/Specjalizacja</label>
+          <input type="text" id="educationProfession${educationCount}" name="education[${educationCount}][profession]">
+        </div>
+        <div class="form-group">
+          <label for="educationTypeEng${educationCount}">Typ szkoły (ENG)</label>
+          <input type="text" id="educationTypeEng${educationCount}" name="education[${educationCount}][typeOfSchoolEng]">
+        </div>
+        <div class="form-group">
+          <label for="educationTypeDe${educationCount}">Typ szkoły (DE)</label>
+          <input type="text" id="educationTypeDe${educationCount}" name="education[${educationCount}][typeOfSchoolDe]">
+        </div>
+      </div>
+    `;
+        container.appendChild(div);
+        educationCount++;
+    }
+
+    let experienceCount = 1;
+    function addExperience() {
+        const container = document.getElementById('experienceContainer');
+        const div = document.createElement('div');
+        div.className = 'experience-entry';
+        div.innerHTML = `
+      <div class="form-row">
+        <div class="form-group">
+          <label for="expDateFrom${experienceCount}">Data rozpoczęcia *</label>
+          <input type="date" id="expDateFrom${experienceCount}" name="professionalExperience[${experienceCount}][dateFrom]" required>
+        </div>
+        <div class="form-group">
+          <label for="expDateTo${experienceCount}">Data zakończenia *</label>
+          <input type="date" id="expDateTo${experienceCount}" name="professionalExperience[${experienceCount}][dateTo]" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="expCountry${experienceCount}">Kraj *</label>
+          <input type="text" id="expCountry${experienceCount}" name="professionalExperience[${experienceCount}][country]" required>
+        </div>
+        <div class="form-group">
+          <label for="expCity${experienceCount}">Miasto *</label>
+          <input type="text" id="expCity${experienceCount}" name="professionalExperience[${experienceCount}][city]" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="expCompany${experienceCount}">Firma *</label>
+          <input type="text" id="expCompany${experienceCount}" name="professionalExperience[${experienceCount}][company]" required>
+        </div>
+        <div class="form-group">
+          <label for="expProfession${experienceCount}">Stanowisko *</label>
+          <input type="text" id="expProfession${experienceCount}" name="professionalExperience[${experienceCount}][profession]" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="expProfessionDe${experienceCount}">Stanowisko (DE) *</label>
+          <input type="text" id="expProfessionDe${experienceCount}" name="professionalExperience[${experienceCount}][professionDe]" required>
+        </div>
+        <div class="form-group">
+          <label for="expProfessionEng${experienceCount}">Stanowisko (ENG) *</label>
+          <input type="text" id="expProfessionEng${experienceCount}" name="professionalExperience[${experienceCount}][professionEng]" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Zadania (DE)</label>
+          <div id="tasksDeContainer${experienceCount}" class="dynamic-section">
+            <div class="form-group">
+              <input type="text" id="expTaskDe${experienceCount}_0" name="professionalExperience[${experienceCount}][experienceTaskDe][0][name]">
+            </div>
+          </div>
+          <button type="button" class="add-button" onclick="addTask('tasksDeContainer${experienceCount}', 'professionalExperience[${experienceCount}][experienceTaskDe]')">Dodaj zadanie (DE)</button>
+        </div>
+        <div class="form-group">
+          <label>Zadania (ENG)</label>
+          <div id="tasksEngContainer${experienceCount}" class="dynamic-section">
+            <div class="form-group">
+              <input type="text" id="expTaskEng${experienceCount}_0" name="professionalExperience[${experienceCount}][experienceTaskEng][0][name]">
+            </div>
+          </div>
+          <button type="button" class="add-button" onclick="addTask('tasksEngContainer${experienceCount}', 'professionalExperience[${experienceCount}][experienceTaskEng]')">Dodaj zadanie (ENG)</button>
+        </div>
+      </div>
+    `;
+        container.appendChild(div);
+        experienceCount++;
+    }
+
+    function addTask(containerId, fieldName) {
+        const container = document.getElementById(containerId);
+        const index = container.childElementCount;
+        const div = document.createElement('div');
+        div.className = 'form-group';
+        div.innerHTML = `<input type="text" id="${containerId}_${index}" name="${fieldName}[${index}][name]">`;
+        container.appendChild(div);
+    }
+</script>
+
+</body>
+</html>

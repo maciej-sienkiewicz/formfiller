@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Boczny</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- Panel logowania -->
+<div id="login-container" class="content">
+    <h2>Logowanie</h2>
+    <input type="text" id="username" placeholder="Login">
+    <input type="password" id="password" placeholder="Hasło">
+    <button id="login-button">Zaloguj</button>
+    <p id="login-error" class="error-message" style="display: none;">Nieprawidłowe dane logowania</p>
+</div>
+
+<div id="password-change" class="content">
+    <h2>Ustaw swoje hasło</h2>
+    <input type="password" id="new-password" placeholder="Hasło">
+    <input type="password" id="repeat-password" placeholder="Powtórz hasło">
+    <button id="password-change-button">Zapisz</button>
+    <p id="new-password-error" class="error-message" style="display: none;">Podane hasła są różne</p>
+</div>
+
+<!-- Panel główny -->
+<div id="main-container" class="container" style="display: none;">
+    <!-- Menu boczne -->
+    <div class="sidebar" id="menu-container">
+        <div class="menu-item" id="candidate-profile-button">
+            <span class="icon">📝</span>
+            <span class="label">Profil kandydata</span>
+        </div>
+        <div class="menu-item" id="mail-helper">
+            <span class="icon">✉️</span>
+            <span class="label">Wesprzyj w mailu</span>
+        </div>
+        <div class="menu-item" id="sms-sender">
+            <span class="icon">💬</span>
+            <span class="label">Wyślij SMS</span>
+        </div>
+        <div class="menu-item" id="report-issue-button">
+            <span class="icon">🛠️</span>
+            <span class="label">Zgłoś problem</span>
+        </div>
+        <div class="menu-item" id="do-a-prank-button">
+            <span class="icon">😜</span>
+            <span class="label">Zrób psikusa!</span>
+        </div>
+        <div class="menu-item" id="logout-button">
+            <span class="icon">👋</span>
+            <span class="label">Wyloguj</span>
+        </div>
+    </div>
+
+    <!-- Główna zawartość -->
+    <div class="content" id="content">
+        <p>Witaj w systemie! Wybierz opcję z menu.</p>
+    </div>
+</div>
+
+<script type="module" src="js/domManager.js"></script>
+
+</body>
+</html>
