@@ -17,6 +17,20 @@ candidateProfileButton.addEventListener("click", () => {
 function showUploadInterface() {
     UI.updateContent(`
         <div id="instructions-container">
+            <div class="section-header">
+                <div class="section-icon">
+                    <i class="fa-solid fa-user-tie"></i>
+                </div>
+                <div>
+                    <h3 class="section-title">Profil kandydata</h3>
+                    <p class="section-subtitle">Szybko wypełnij profil na podstawie CV</p>
+                </div>
+            </div>
+            
+            <button id="upload-file-btn" class="btn-primary">
+                <i class="fa-solid fa-cloud-upload-alt"></i> Prześlij plik CV
+            </button>
+            
             <h3>Instrukcja korzystania z wtyczki</h3>
             <ol>
                 <li>
@@ -41,7 +55,6 @@ function showUploadInterface() {
                     Jest to tylko program komputerowy i nie ponosi odpowiedzialności za ewentualne błędy w danych.
                 </li>
             </ol>
-            <button id="upload-file-btn" class="primary-btn">Prześlij plik</button>
         </div>
     `);
 
@@ -61,6 +74,7 @@ function createFileInput() {
     const fileInput = document.createElement("input");
     fileInput.type = "file";
     fileInput.style.display = "none";
+    fileInput.accept = ".pdf,.docx,.doc,.rtf";
     document.body.appendChild(fileInput);
     return fileInput;
 }
@@ -70,18 +84,57 @@ async function handleFileUpload(event) {
     if (!file) return;
 
     UI.updateContent(`
-        <div class="spinner"></div>
-        <p>Rozpoczynam przetwarzanie pliku...</p>
+        <div class="processing-container">
+            <div class="spinner"></div>
+            <p>Rozpoczynam przetwarzanie pliku...</p>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
+        </div>
     `);
+
+    // Animacja paska postępu
+    const progressFill = document.querySelector('.progress-fill');
+    progressFill.style.width = '0%';
+
+    setTimeout(() => {
+        progressFill.style.width = '80%';
+        progressFill.style.transition = 'width 2s ease-in-out';
+    }, 100);
 
     try {
         const token = await getToken();
         const result = await uploadFile(file, token);
         await processFormData(result, token);
 
-        UI.updateContent(`
-            <p>Teraz się proszę upewnij, że wszystko uzupełniliśmy poprawnie.</p>
-        `);
+        progressFill.style.width = '100%';
+
+        setTimeout(() => {
+            UI.updateContent(`
+                <div class="section-header">
+                    <div class="section-icon">
+                        <i class="fa-solid fa-check-circle"></i>
+                    </div>
+                    <div>
+                        <h3 class="section-title">Profil kandydata uzupełniony</h3>
+                        <p class="section-subtitle">Upewnij się, że wszystkie dane zostały wprowadzone poprawnie</p>
+                    </div>
+                </div>
+                
+                <div class="alert alert-success">
+                    <i class="fa-solid fa-check-circle"></i>
+                    <div>Dane z CV zostały pomyślnie przetworzone i wprowadzone do formularza.</div>
+                </div>
+                
+                <button id="upload-another-btn" class="btn-primary">
+                    <i class="fa-solid fa-cloud-upload-alt"></i> Prześlij inny plik
+                </button>
+            `);
+
+            document.getElementById("upload-another-btn").addEventListener("click", () => {
+                candidateProfileButton.click();
+            });
+        }, 300);
 
         await updateStats(token);
     } catch (error) {
@@ -114,28 +167,6 @@ async function uploadFile(file, token) {
 
     const candidateProfile = await response.json();
     return candidateProfile;
-}
-
-async function pollForResults(jobId, token) {
-    const poll = async () => {
-        const response = await fetch(
-            `http://localhost:20266/api/form-filler/result?jobId=${jobId}`,
-            { headers: { "Authorization": `Bearer ${token}` } }
-        );
-
-        if (response.status === 202) return null;
-        if (!response.ok) handleHttpError(response.status);
-        return response;
-    };
-
-    let response = null;
-    while (response === null) {
-        response = await poll();
-        if (response === null) {
-            await new Promise(resolve => setTimeout(resolve, 3000));
-        }
-    }
-    return response.json();
 }
 
 async function processFormData(data, token) {
@@ -435,8 +466,29 @@ function handleHttpError(status) {
 function handleError(error) {
     console.error("Błąd podczas ładowania danych kandydata:", error);
     UI.updateContent(`
-        <p>Wystąpił błąd podczas ładowania danych: ${error.message}</p>
+        <div class="section-header">
+            <div class="section-icon">
+                <i class="fa-solid fa-exclamation-triangle"></i>
+            </div>
+            <div>
+                <h3 class="section-title">Wystąpił błąd</h3>
+                <p class="section-subtitle">Nie udało się przetworzyć pliku</p>
+            </div>
+        </div>
+        
+        <div class="alert alert-danger">
+            <i class="fa-solid fa-times-circle"></i>
+            <div>Wystąpił błąd podczas ładowania danych: ${error.message}</div>
+        </div>
+        
+        <button id="try-again-btn" class="btn-primary">
+            <i class="fa-solid fa-redo"></i> Spróbuj ponownie
+        </button>
     `);
+
+    document.getElementById("try-again-btn").addEventListener("click", () => {
+        candidateProfileButton.click();
+    });
 }
 
 export default handleError;

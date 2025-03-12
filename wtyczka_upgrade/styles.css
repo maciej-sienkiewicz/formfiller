@@ -1,14 +1,37 @@
 /* ------------------- RESET / PODSTAWY ------------------- */
+:root {
+    --primary-color: #4361ee;
+    --primary-hover: #3a56d4;
+    --secondary-color: #38b000;
+    --secondary-hover: #2d9100;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --light-bg: #f8f9fa;
+    --card-bg: #ffffff;
+    --border-color: #e9ecef;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.12);
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --font-main: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+}
+
 html, body {
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* brak scrolla poziomego */
-    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    background: #f5f5f5; /* tło całej aplikacji */
-    color: #333;
-    min-width: 300px; /* minimalna szerokość wtyczki */
+    overflow-x: hidden;
+    font-family: var(--font-main);
+    background: var(--light-bg);
+    color: var(--text-primary);
+    min-width: 320px;
     box-sizing: border-box;
+    font-size: 16px;
+    line-height: 1.5;
 }
+
 *, *::before, *::after {
     box-sizing: inherit;
 }
@@ -16,51 +39,80 @@ html, body {
 /* ------------------- GŁÓWNY PANEL ------------------- */
 .container {
     display: flex;
-    height: 100vh; /* Cała wysokość ekranu */
+    height: 100vh;
     max-width: 960px;
     margin: 0 auto;
-    background-color: #ffffff;
-    border-radius: 12px 0 0 12px; /* Zaokrąglone tylko lewa strona */
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    background-color: var(--card-bg);
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
 }
 
 /* ------------------- PANEL BOCZNY (SIDEBAR) ------------------- */
 .sidebar {
-    width: 70px;
-    background: transparent; /* korzysta z tła rodzica (.container) */
+    width: 80px;
+    background: #fcfcfc;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding-top: 10px;
-    border-right: 2px solid #f0f0f0; /* pionowa kreska */
+    padding-top: 20px;
+    border-right: 1px solid var(--border-color);
+    box-shadow: inset -2px 0 5px rgba(0,0,0,0.02);
 }
 
 .menu-item {
     width: 100%;
     cursor: pointer;
-    color: #666;
-    transition: color 0.2s ease, background-color 0.2s ease, transform 0.1s ease;
+    color: var(--text-secondary);
+    transition: all var(--transition-fast);
     text-align: center;
-    padding: 15px 0;
+    padding: 18px 0;
+    margin-bottom: 5px;
+    position: relative;
+    overflow: hidden;
 }
+
 .menu-item:hover {
-    background-color: #f0f0f0;
-    color: #333;
-    transform: scale(1.02);
+    background-color: rgba(67, 97, 238, 0.08);
+    color: var(--primary-color);
 }
+
 .menu-item.active {
-    background-color: #d1e7ff;
-    color: #0056b3;
+    background-color: rgba(67, 97, 238, 0.12);
+    color: var(--primary-color);
+}
+
+.menu-item.active::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 4px;
+    background-color: var(--primary-color);
 }
 
 .icon {
     font-size: 24px;
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    transition: transform var(--transition-fast);
 }
+
+.menu-item:hover .icon {
+    transform: scale(1.1);
+}
+
 .label {
     font-size: 12px;
+    font-weight: 500;
+    transition: opacity var(--transition-fast);
+    max-width: 100%;
+    padding: 0 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 /* ------------------- OBSZAR CONTENT ------------------- */
@@ -77,25 +129,26 @@ html, body {
 
 .content p {
     margin: 10px 0;
-    text-align: center;
     font-size: 14px;
-    color: #333;
+    color: var(--text-primary);
+    line-height: 1.6;
 }
 
 #content {
     width: 100%;
-    max-width: 480px;
+    max-width: 500px;
     margin: 0 auto;
     padding: 0;
     background-color: transparent;
     border-radius: 0;
     box-shadow: none;
-    animation: fadeIn 0.3s ease-out;
+    animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
+
 @keyframes fadeIn {
     from {
         opacity: 0;
-        transform: translateY(6px);
+        transform: translateY(12px);
     }
     to {
         opacity: 1;
@@ -105,11 +158,12 @@ html, body {
 
 #content h3 {
     margin-top: 0;
-    margin-bottom: 16px;
-    font-size: 1.3rem;
-    color: #444;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 8px;
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    font-weight: 600;
 }
 
 /* ------------------- PRODUKTY ------------------- */
@@ -122,114 +176,189 @@ html, body {
 .product-row {
     display: flex;
     flex-direction: column;
-    margin: 10px 0;
-    padding: 12px;
-    background-color: #f8fafe;
-    border-radius: 8px;
-    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    margin: 12px 0;
+    padding: 16px;
+    background-color: #fafcff;
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
+    border: 1px solid #e8eef7;
 }
+
 .product-row:hover {
-    background-color: #eef5fe;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    background-color: #f0f6ff;
+    box-shadow: var(--shadow-sm);
+    transform: translateY(-2px);
 }
 
 .product-label {
     font-weight: 600;
-    color: #555;
-    margin-bottom: 6px;
+    color: var(--text-primary);
+    margin-bottom: 8px;
     text-align: left;
     font-size: 0.95rem;
 }
 
 .product-input {
     width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #ccd5e0;
-    border-radius: 6px;
+    padding: 10px 12px;
+    border: 1px solid #d0daea;
+    border-radius: var(--radius-sm);
     font-size: 0.95rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    transition: all var(--transition-fast);
+    background-color: white;
 }
+
 .product-input:focus {
     outline: none;
-    border-color: #4285f4;
-    box-shadow: 0 0 0 3px rgba(66,133,244,0.2);
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
 }
 
 /* ------------------- PRZYCISKI ------------------- */
-
 /* Wspólne style dla obu przycisków (niebieski i zielony) */
 .save-button,
 .save-button-green {
     display: inline-block;
     text-align: center;
     white-space: nowrap;
-    min-width: 120px;    /* ustala stałą minimalną szerokość */
-    padding: 10px 18px;
+    min-width: 130px;
+    padding: 12px 20px;
     font-size: 0.95rem;
     font-weight: 600;
     border: none;
-    border-radius: 8px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    transition: background-color 0.3s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    transition: all var(--transition-normal);
+    letter-spacing: 0.2px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efekt fali po kliknięciu przycisku */
+.save-button::after,
+.save-button-green::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.save-button:active::after,
+.save-button-green:active::after {
+    opacity: 0.3;
+    transform: scale(100, 100) translate(-50%);
+    transition: all 0.6s, opacity 0.3s;
 }
 
 /* Niebieski przycisk (domyślny) */
 .save-button {
-    background-color: #4285f4;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: white;
 }
+
 .save-button:hover {
-    background-color: #3074e7;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    transform: translateY(-1px);
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.35);
+    transform: translateY(-2px);
 }
+
 .save-button:active {
     transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(67, 97, 238, 0.2);
 }
+
 .save-button:disabled {
-    background-color: #ccc !important;
-    color: #666 !important;
+    background-color: #d9dde3 !important;
+    color: #8e99a8 !important;
     cursor: not-allowed !important;
     box-shadow: none !important;
     transform: none !important;
-    opacity: 0.6;
+    opacity: 0.8;
 }
 
 /* Zielony przycisk (używany przy przełączaniu stanu) */
 .save-button-green {
-    background-color: #28a745;
-    color: #fff;
+    background-color: var(--secondary-color);
+    color: white;
 }
+
 .save-button-green:hover {
-    background-color: #218838;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    transform: translateY(-1px);
+    background-color: var(--secondary-hover);
+    box-shadow: 0 4px 12px rgba(56, 176, 0, 0.35);
+    transform: translateY(-2px);
 }
+
 .save-button-green:active {
     transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 5px rgba(56, 176, 0, 0.2);
 }
+
 .save-button-green:disabled {
-    background-color: #ccc !important;
-    color: #666 !important;
+    background-color: #d9dde3 !important;
+    color: #8e99a8 !important;
     cursor: not-allowed !important;
     box-shadow: none !important;
     transform: none !important;
-    opacity: 0.6;
+    opacity: 0.8;
+}
+
+/* Przycisk dodawania (zielony) */
+.add-button {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    padding: 9px 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-button:hover {
+    background-color: var(--secondary-hover);
+    box-shadow: 0 3px 10px rgba(56, 176, 0, 0.3);
+    transform: translateY(-1px);
+}
+
+.add-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 3px rgba(0,0,0,0.1);
+}
+
+/* Dodaj ikony + przed treścią przycisku */
+.add-button::before {
+    content: "+";
+    margin-right: 5px;
+    font-size: 1.1rem;
+    font-weight: bold;
 }
 
 /* ------------------- INNE ELEMENTY ------------------- */
 .spinner {
-    border: 4px solid #f3f3f3;
-    border-top: 4px solid #3498db;
+    border: 3px solid rgba(67, 97, 238, 0.1);
+    border-top: 3px solid var(--primary-color);
     border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-    margin: 10px auto;
+    width: 32px;
+    height: 32px;
+    animation: spin 0.8s linear infinite;
+    margin: 15px auto;
 }
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
@@ -239,77 +368,84 @@ html, body {
     width: 100%;
     max-width: 400px;
     background: white;
-    padding: 20px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    padding: 25px;
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-md);
     text-align: center;
     margin: auto;
 }
+
 .login-container h2 {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    color: var(--text-primary);
 }
+
 .login-container input {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    padding: 12px 15px;
+    margin: 12px 0;
+    border: 1px solid #d0daea;
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    transition: all var(--transition-fast);
 }
+
+.login-container input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+}
+
 .login-container button {
     width: 100%;
-    padding: 10px;
-    background: #007bff;
+    padding: 12px;
+    background: var(--primary-color);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: var(--radius-sm);
     cursor: pointer;
-}
-.login-container button:hover {
-    background: #0056b3;
-}
-.error {
-    color: red;
-    font-size: 14px;
+    font-weight: 600;
+    transition: all var(--transition-normal);
     margin-top: 10px;
 }
+
+.login-container button:hover {
+    background: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(67, 97, 238, 0.35);
+}
+
+.error {
+    color: #e63946;
+    font-size: 14px;
+    margin-top: 10px;
+    padding: 8px;
+    background-color: rgba(230, 57, 70, 0.08);
+    border-radius: var(--radius-sm);
+}
+
 .error-input {
-    border: 2px solid red !important;
-    background-color: #ffe5e5;
+    border: 2px solid #e63946 !important;
+    background-color: rgba(230, 57, 70, 0.05) !important;
 }
 
 /* Panel z opisem i przyciskiem override */
-.override-container {
-    margin: 10px 0;
-    padding: 16px;
-    background-color: #f8fafe;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
-    animation: fadeIn 0.3s ease-out;
-}
-.override-intro {
-    margin: 0;
-    padding: 0 0 12px 0;
-    line-height: 1.4;
-    color: #444;
-    font-size: 0.95rem;
-    text-align: left;
-}
-
-/* Panel z opisem i formularzem zgłoszenia problemu */
+.override-container,
 .alert-issue-container {
-    margin: 10px 0;
-    padding: 16px;
-    background-color: #f8fafe;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
-    animation: fadeIn 0.3s ease-out;
+    margin: 15px 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid var(--border-color);
 }
 
-/* Tekst informacyjny */
+.override-intro,
 .alert-issue-intro {
-    margin: 0 0 12px 0;
-    line-height: 1.4;
-    color: #444;
+    margin: 0;
+    padding: 0 0 15px 0;
+    line-height: 1.5;
+    color: var(--text-primary);
     font-size: 0.95rem;
     text-align: left;
 }
@@ -317,100 +453,210 @@ html, body {
 /* Pole tekstowe do wpisywania problemu */
 .alert-issue-input {
     width: 100%;
-    padding: 8px 10px;
-    border: 1px solid #ccd5e0;
-    border-radius: 6px;
+    padding: 12px 15px;
+    border: 1px solid #d0daea;
+    border-radius: var(--radius-sm);
     font-size: 0.95rem;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    margin-bottom: 12px;
-}
-.alert-issue-input:focus {
-    outline: none;
-    border-color: #4285f4;
-    box-shadow: 0 0 0 3px rgba(66,133,244,0.2);
+    transition: all var(--transition-fast);
+    margin-bottom: 15px;
+    background-color: white;
+    resize: vertical;
+    min-height: 80px;
 }
 
-/* Stylizacja przycisku "Wyślij" */
-.alert-issue-button {
-    display: inline-block;
-    background-color: #4285f4;
-    color: #fff;
-    font-size: 0.95rem;
-    font-weight: 600;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 18px;
-    cursor: pointer;
-    min-width: 120px;
-    text-align: center;
-    white-space: nowrap;
-    transition: background-color 0.3s ease, box-shadow 0.2s ease, transform 0.2s ease;
-}
-.alert-issue-button:hover {
-    background-color: #3074e7;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.2);
-    transform: translateY(-1px);
-}
-.alert-issue-button:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+.alert-issue-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
 }
 
 /* Komunikat podziękowania */
 .alert-issue-thanks {
     margin: 0;
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 600;
-    color: #444;
+    color: var(--text-primary);
     text-align: center;
-    padding: 16px 0;
+    padding: 20px 0;
 }
-
-/* Prosta animacja fadeIn – jeśli jeszcze nie masz zdefiniowanej */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(6px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 
 /* Powitalny komunikat */
 .welcome-text {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #444;
-    margin-bottom: 20px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 25px;
     text-align: center;
 }
 
 /* Panel z opisem funkcji */
 .function-descriptions {
-    background-color: #f8fafe;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.07);
+    background-color: white;
+    border-radius: var(--radius-md);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
     margin-top: 20px;
+    border: 1px solid var(--border-color);
 }
+
 .function-descriptions h3 {
     margin-top: 0;
-    font-size: 1.1rem;
-    color: #333;
-    border-bottom: 2px solid #f0f0f0;
-    padding-bottom: 8px;
+    font-size: 1.2rem;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 10px;
+    font-weight: 600;
 }
+
 .function-descriptions ul {
-    list-style: disc;
-    padding-left: 20px;
-    margin: 10px 0;
+    list-style: none;
+    padding-left: 5px;
+    margin: 15px 0;
 }
+
 .function-descriptions li {
     font-size: 0.95rem;
-    color: #555;
-    margin-bottom: 8px;
-    line-height: 1.4;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    line-height: 1.5;
+    position: relative;
+    padding-left: 28px;
+}
+
+/* Dodaj niestandardowe ikony do listy */
+.function-descriptions li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--primary-color);
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 100%;
+}
+
+/* Stylizowane wykończenie dla każdego punktu funkcji */
+.function-descriptions li strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* ------------------- FORMULARZ ------------------- */
+/* Ulepszone style dla dynamicznych sekcji */
+.dynamic-section {
+    margin-bottom: 15px;
+}
+
+/* Poprawa poziomów dla form-row i form-group */
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+    gap: 15px;
+}
+
+.form-group {
+    flex: 1;
+    min-width: 250px;
+    margin-bottom: 15px;
+}
+
+/* Stylizacja dla checkboxów */
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.checkbox-group > div {
+    display: flex;
+    align-items: center;
+    margin-right: 0;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 6px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+}
+
+.checkbox-group label {
+    font-weight: normal;
+    margin-bottom: 0;
+    cursor: pointer;
+}
+
+/* Stylizacja dla fieldsetów */
+fieldset {
+    border: 1px solid var(--border-color);
+    margin-bottom: 25px;
+    padding: 20px;
+    border-radius: var(--radius-md);
+    background-color: #fcfcfc;
+}
+
+legend {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 0 10px;
+}
+
+/* Sekcje education i experience */
+.education-entry,
+.experience-entry {
+    border: 1px solid #e9ecef;
+    border-radius: var(--radius-sm);
+    padding: 15px;
+    margin-bottom: 20px;
+    background-color: white;
+    transition: all var(--transition-fast);
+}
+
+.education-entry:hover,
+.experience-entry:hover {
+    box-shadow: var(--shadow-sm);
+}
+
+/* Przyciski w button-group */
+.button-group {
+    text-align: right;
+    margin-top: 15px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+/* Responsywność dla bardzo małych ekranów */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 70px;
+    }
+
+    .form-group {
+        min-width: 200px;
+    }
+
+    .content {
+        padding: 15px;
+    }
+
+    #content {
+        max-width: 100%;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .save-button,
+    .save-button-green {
+        width: 100%;
+    }
 }

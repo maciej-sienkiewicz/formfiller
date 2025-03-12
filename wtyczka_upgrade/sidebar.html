@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Boczny</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
@@ -13,32 +14,33 @@
     <!-- Menu boczne -->
     <div class="sidebar" id="menu-container">
         <div class="menu-item" id="override-reference-numbers">
-            <span class="icon">📝</span>
-            <span class="label">Nadpisz numery ref.</span>
+            <span class="icon"><i class="fas fa-tag"></i></span>
+            <span class="label">Numery ref.</span>
         </div>
         <div class="menu-item" id="product-configuration">
-            <span class="icon">🛠️</span>
-            <span class="label">Edytuj etykiety</span>
+            <span class="icon"><i class="fas fa-cog"></i></span>
+            <span class="label">Etykiety</span>
         </div>
         <div class="menu-item" id="alert-issue">
-            <span class="icon">⚠️</span>
-            <span class="label">Zgłoś usterkę</span>
+            <span class="icon"><i class="fas fa-exclamation-circle"></i></span>
+            <span class="label">Zgłoś problem</span>
         </div>
     </div>
 
     <!-- Główna zawartość -->
     <div class="content" id="content">
+        <div class="welcome-text">Witaj w asystencie zamówień!</div>
         <div class="function-descriptions">
-            <h3>Opis funkcji:</h3>
+            <h3>Co możesz zrobić:</h3>
             <ul>
                 <li>
-                    <strong>Nadpisz numery ref.</strong>: Pozwala na nadpisanie numerów referencyjnych poprzez wprowadzenie własnych ustawień.
+                    <strong>Nadpisz numery ref.</strong> - Automatycznie uzupełnij numery referencyjne dla produktów na podstawie wcześniejszej konfiguracji.
                 </li>
                 <li>
-                    <strong>Konfiguruj etykiety produktów</strong>: Umożliwia konfigurację etykiet produktów oraz przypisanie do nich numerów referencyjnych.
+                    <strong>Edytuj etykiety</strong> - Skonfiguruj numery referencyjne dla poszczególnych produktów, które będą używane w przyszłości.
                 </li>
                 <li>
-                    <strong>Alert Issue</strong>: Jeśli napotkasz problem, użyj tej opcji, aby zgłosić problem. Wypełnij formularz, a my szybko się nim zajmiemy.
+                    <strong>Zgłoś problem</strong> - Napotkałeś problem podczas korzystania z wtyczki? Daj nam znać, a szybko się nim zajmiemy.
                 </li>
             </ul>
         </div>
