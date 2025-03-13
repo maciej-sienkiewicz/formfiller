@@ -5,10 +5,16 @@ import com.nimbusds.jose.jwk.OctetSequenceKey
 import com.nimbusds.jose.jwk.source.ImmutableJWKSet
 import io.jsonwebtoken.io.Decoders
 import io.jsonwebtoken.security.Keys
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.core.annotation.Order
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
+import org.springframework.security.config.annotation.web.configurers.CsrfConfigurer
+import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer
 import org.springframework.security.config.http.SessionCreationPolicy
+import org.springframework.security.core.userdetails.User
+import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder
 import org.springframework.security.oauth2.jose.jws.MacAlgorithm
 import org.springframework.security.oauth2.jwt.JwtDecoder
@@ -17,6 +23,7 @@ import org.springframework.security.oauth2.jwt.NimbusJwtDecoder
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter
+import org.springframework.security.provisioning.InMemoryUserDetailsManager
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.web.cors.CorsConfiguration
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource
@@ -45,6 +52,30 @@ class SecurityConfig {
     }
 
     @Bean
+    @Order(1) // Wyższy priorytet - ta konfiguracja zostanie sprawdzona przed główną konfiguracją
+    fun actuatorSecurityFilterChain(http: HttpSecurity): SecurityFilterChain {
+        http
+            .securityMatcher("/actuator/**") // Tylko dla actuator endpoints
+            .authorizeHttpRequests { auth ->
+                auth.anyRequest().authenticated()
+            }
+            .httpBasic {}
+            .csrf { csrf: CsrfConfigurer<HttpSecurity> -> csrf.disable() }
+
+        return http.build()
+    }
+
+    @Bean
+    fun userDetailsService(): UserDetailsService {
+        val user = User.builder()
+            .username("2da7acd6-f281-470a-86bd-d91cb209fca1")
+            .password(passwordEncoder().encode("87ba4b26-3a9d-4c85-b38f-16c75672a3fd"))
+            .build()
+        return InMemoryUserDetailsManager(user)
+    }
+
+    @Bean
+    @Order(2) // Niższy priorytet - będzie sprawdzona po actuator security filter chain
     fun apiSecurityFilterChain(http: HttpSecurity): SecurityFilterChain {
         http
             .authorizeHttpRequests { auth ->
