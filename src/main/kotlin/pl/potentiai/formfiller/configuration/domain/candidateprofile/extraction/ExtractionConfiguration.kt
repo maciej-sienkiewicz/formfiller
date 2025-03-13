@@ -35,17 +35,29 @@ class ExtractionConfiguration {
         PoiDocExtractor()
 
     @Bean
+    fun odtExtractor(): OdtExtractor =
+        OdtExtractor()
+
+    @Bean
+    fun txtExtractor(): TxtExtractor =
+        TxtExtractor()
+
+    @Bean
     fun contentExtractorStrategy(
         pdfboxExtractor: PDFBoxExtractor,
         poiDocxExtractor: PoiDocxExtractor,
         rtfExtractor: RtfExtractor,
         docExtractor: PoiDocExtractor,
-        aiExtractor: AIExtractor): ContentExtractorStrategy =
+        aiExtractor: AIExtractor,
+        odtExtractor: OdtExtractor,
+        txtExtractor: TxtExtractor): ContentExtractorStrategy =
         ContentExtractorStrategy(
             pdfBoxExtractor = pdfboxExtractor,
             docsxExtractor = poiDocxExtractor,
             rtfExtractor = rtfExtractor,
             docExtractor = docExtractor,
-            aiExtractor = aiExtractor
+            aiExtractor = aiExtractor,
+            odtExtractor = odtExtractor,
+            txtExtractor = txtExtractor
         )
 }
