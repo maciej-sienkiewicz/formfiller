@@ -25,12 +25,11 @@ Wynik powinien być przedstawiony wyłącznie w poniższej strukturze JSON:
 }
 
 Zasady:
-1. Pole "name" powinno zawierać nazwę języka w języku polskim.
-2. Pole "name" powinno zawsze być w języki polskim i zaczynać się z dużej litery, przykład: "Niemiecki"
+1. Pole "name" powinno zawierać nazwę języka w języku polskim i zaczynać się z dużej litery, przykład: "Niemiecki"
 2. Pole "languageLevel" powinno zawierać najtrafniejszy poziom z listy powyżej na podstawie tekstu wejściowego.
-3. Jeśli tekst nie podaje bezpośredniego poziomu, oszacuj najbardziej odpowiedni poziom na podstawie kontekstu (np. opisy typu "podstawy" to "słabo komunikatywnie (A1/A2)", a "biegły" to "bardzo dobry (C1)").
-4. Jeśli w tekście brak jest jakichkolwiek informacji o językach, zwróć pustą tablicę w polu "languages".
-5. Nie dodawaj żadnych dodatkowych informacji, opisów ani znaków poza oczekiwanym JSON.
-
+3. Wartość wstawiona w "languageLevel" koniecznie musi odpowiadać jednej wartości z: ["słabo komunikatywnie (A1/A2)", "komunikatywnie (A2/B1)", "dobrze-komunikatywnie (B1/B2)", "bardzo dobry (C1)"]
+4. Jeśli tekst nie podaje bezpośredniego poziomu, oszacuj najbardziej odpowiedni poziom na podstawie kontekstu (np. opisy typu "podstawy" to "słabo komunikatywnie (A1/A2)", a "biegły" to "bardzo dobry (C1)").
+5. Jeśli w tekście brak jest jakichkolwiek informacji o językach, zwróć pustą tablicę w polu "languages".
+6. Nie dodawaj żadnych dodatkowych informacji, opisów ani znaków poza oczekiwanym JSON.
 """.trimIndent()
 }
