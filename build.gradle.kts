@@ -38,6 +38,8 @@ dependencies {
 	implementation("io.jsonwebtoken:jjwt-api:0.12.6")
 	implementation("io.jsonwebtoken:jjwt-impl:0.12.6")
 	implementation("io.jsonwebtoken:jjwt-jackson:0.12.6")
+	implementation("org.odftoolkit:odfdom-java:0.9.0")
+
 
 	implementation("org.apache.pdfbox:pdfbox:2.0.27")
 
