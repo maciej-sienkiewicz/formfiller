@@ -7,7 +7,9 @@ import pl.potentiai.formfiller.infrastructure.metrics.TimeableWrapper
 class EducationPrompt(openAI: OpenAI, timeableWrapper: TimeableWrapper): Extractor<Educations>(openAI, Educations::class, timeableWrapper, "education") {
 
     override val PROMPT = """
-Twoim zadaniem jest przeanalizowanie tekstu wejściowego i wyodrębnienie informacji o edukacji w poniższej strukturze JSON:
+Twoim zadaniem jest znalezienie sekcji z edukacją i wyekstraktowanie danych o pozycjach związanych z edukacją. 
+Skup się tylko na edukacji: pomiń rekordy związane ze zdobytymi certyfikatami czy uprawnieniami. Skup się tylko na edukacji szkolnej.
+Przygotuj odpowiedź w formacie JSON:
 
 {
     "educations": [
