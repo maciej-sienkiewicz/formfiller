@@ -18,7 +18,7 @@ abstract class Extractor<T : Any>(
 
     open fun model() = "gpt-4o-mini"
 
-    private val mapper = ObjectMapper()
+    val mapper = ObjectMapper()
         .registerModule(KotlinModule.Builder().build())
 
     abstract val PROMPT: String
@@ -56,7 +56,7 @@ abstract class Extractor<T : Any>(
         return reseponse
     }
 
-    private fun String.mapJsonToClassObject(): T =
+    open fun String.mapJsonToClassObject(): T =
         mapper.readValue(this.getOnlyJson(), targetClass.java)
 
     private fun String.getOnlyJson(): String =

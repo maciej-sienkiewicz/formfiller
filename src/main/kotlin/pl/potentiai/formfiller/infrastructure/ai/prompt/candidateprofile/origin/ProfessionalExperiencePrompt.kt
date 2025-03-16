@@ -7,6 +7,17 @@ import pl.potentiai.formfiller.infrastructure.metrics.TimeableWrapper
 
 class ProfessionalExperiencePrompt(openAI: OpenAI,timeableWrapper: TimeableWrapper): Extractor<ProfessionalExperiences>(openAI, ProfessionalExperiences::class, timeableWrapper, "professionalExperience") {
 
+    override fun String.mapJsonToClassObject(): ProfessionalExperiences {
+        val jsonString = this.trim().let { json ->
+            if (json.startsWith("[")) {
+                "{\"experiences\": $json}"
+            } else {
+                json
+            }
+        }
+        return mapper.readValue(jsonString, ProfessionalExperiences::class.java)
+    }
+
             override val PROMPT = """
 Z przesłanego dokumentu wyekstraktuj  informacje o KAŻDEJ JEDNEJ pozycji w doświadczeniu. Nie halucynuj.
 
