@@ -17,7 +17,7 @@ const Auth = {
 
     login: async function (username, password) {
         try {
-            const response = await fetch("http://localhost:20266/api/login", {
+            const response = await fetch("https://potentai.pl/api/login", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ username, password }),
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", function () {
             throw new Error("Wprowadzone hasła różnia się od siebie");
         }
 
-        const response = await fetch("http://localhost:20266/api/change", {
+        const response = await fetch("https://potentai.pl/api/change", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ password }),

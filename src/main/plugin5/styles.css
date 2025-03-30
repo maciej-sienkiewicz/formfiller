@@ -1,18 +1,24 @@
-/* Zmienne CSS dla lepszej spójności designu */
+/* Zmienne CSS dla lepszej spójności designu - delikatniejsza paleta */
 :root {
     --primary-color: #4361ee;
     --primary-hover: #3a56d4;
     --primary-active: #2e46c0;
+    --primary-light: #eef2ff;
     --secondary-color: #6c757d;
-    --success-color: #2ecc71;
+    --secondary-light: #f8f9fa;
+    --success-color: #34c759;
+    --success-light: #e8f8ee;
     --warning-color: #f39c12;
+    --warning-light: #fff9ed;
     --danger-color: #e74c3c;
+    --danger-light: #feeeee;
     --light-bg: #f8f9fa;
     --dark-bg: #343a40;
     --text-color: #212529;
-    --border-color: #dee2e6;
-    --shadow-sm: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
-    --shadow-md: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --text-muted: #6c757d;
+    --border-color: #e9ecef;
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
     --border-radius: 0.5rem;
     --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     --transition: all 0.3s ease;
@@ -43,7 +49,7 @@ body {
     background-color: white;
 }
 
-/* Ulepszony sidebar */
+/* Ulepszony sidebar - delikatniejszy */
 .sidebar {
     display: flex;
     flex-direction: column;
@@ -56,7 +62,7 @@ body {
     z-index: 10;
 }
 
-/* Elementy menu */
+/* Elementy menu - delikatniejsze */
 .menu-item {
     display: flex;
     flex-direction: column;
@@ -65,36 +71,36 @@ body {
     padding: 12px 0;
     margin: 5px 0;
     cursor: pointer;
-    color: var(--secondary-color);
+    color: var(--text-muted);
     transition: var(--transition);
     border-radius: 8px;
-    width: 90%;
+    width: 85%;
     margin-left: auto;
     margin-right: auto;
 }
 
 .menu-item:hover {
-    background-color: #f0f7ff;
+    background-color: var(--primary-light);
     color: var(--primary-color);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 .menu-item.active {
-    background-color: #ebf5ff;
+    background-color: var(--primary-light);
     color: var(--primary-color);
-    box-shadow: var(--shadow-sm);
+    box-shadow: none;
 }
 
 /* Ikony i etykiety w menu */
 .icon {
-    font-size: 22px;
-    margin-bottom: 6px;
+    font-size: 20px;
+    margin-bottom: 5px;
     transition: var(--transition);
 }
 
 .label {
     font-size: 10px;
-    font-weight: 600;
+    font-weight: 500;
     text-align: center;
     max-width: 100%;
     white-space: nowrap;
@@ -102,19 +108,19 @@ body {
     text-overflow: ellipsis;
 }
 
-/* Główny kontener treści */
+/* Główny kontener treści - delikatniejszy */
 .content {
     flex-grow: 1;
     background-color: #f8f9fa;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.03);
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.02);
     padding: 1.5rem;
     overflow-y: auto;
     height: 100vh;
 }
 
-/* Stylizacja panelu logowania */
+/* Panel logowania - pozostaje bez zmian, bo podoba się użytkownikowi */
 #login-container, #password-change {
     display: flex;
     flex-direction: column;
@@ -134,12 +140,13 @@ body {
     font-weight: 600;
 }
 
+/* Pola formularzy - delikatniejsze */
 input[type="text"],
 input[type="password"],
 textarea,
 select {
     width: 100%;
-    padding: 0.8rem 1rem;
+    padding: 0.7rem 1rem;
     margin: 0.5rem 0 1rem;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
@@ -155,20 +162,20 @@ textarea:focus,
 select:focus {
     outline: none;
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.15);
+    box-shadow: 0 0 0 2px rgba(67, 97, 238, 0.1);
 }
 
 textarea {
-    min-height: 120px;
+    min-height: 100px;
     resize: vertical;
     line-height: 1.6;
 }
 
-/* Stylizacja przycisków */
+/* Przyciski - delikatniejsze */
 button {
-    padding: 0.8rem 1.2rem;
+    padding: 0.7rem 1.2rem;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     border: none;
     border-radius: var(--border-radius);
     cursor: pointer;
@@ -179,10 +186,10 @@ button {
     box-shadow: var(--shadow-sm);
 }
 
-button:hover:not(:disabled) {
+button:hover:not(:disabled):not(.edit-btn):not(.add-btn) {
     background-color: var(--primary-hover);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-sm);
 }
 
 button:active:not(:disabled) {
@@ -191,68 +198,63 @@ button:active:not(:disabled) {
 }
 
 button:disabled {
-    opacity: 0.6;
+    opacity: 0.7;
     cursor: not-allowed;
 }
 
-/* Przyciski dodatkowe */
-.primary-btn {
+.btn-primary {
     background-color: var(--primary-color);
+    color: white;
 }
 
-.copy-button {
-    background-color: var(--success-color);
-}
-
-.alert-issue-button {
-    background-color: var(--primary-color);
-}
-
-/* Kontenery odpowiedzi i formularzy */
-.response-container, #instructions-container {
-    background-color: white;
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    margin: 1rem 0;
-    box-shadow: var(--shadow-sm);
+.btn-secondary {
+    background-color: var(--secondary-light);
+    color: var(--text-color);
     border: 1px solid var(--border-color);
-    width: 100%;
+}
+
+.btn-secondary:hover {
+    background-color: var(--light-bg);
+    color: var(--text-color);
 }
 
 .form-group {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.3rem;
     width: 100%;
 }
 
-/* Kontenery tekstowe */
+/* Kontenery tekstowe - delikatniejsze */
 #template-preview {
-    background-color: #f8faff;
-    border: 1px dashed #b8c2cc;
+    background-color: var(--secondary-light);
+    border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
     padding: 1rem;
     margin-top: 0.5rem;
     font-size: 14px;
     line-height: 1.6;
-    color: #606f7b;
+    color: var(--text-color);
 }
 
-/* Stylizacja switchów i kontrolek */
+/* Switchów i kontrolek - delikatniejsze, w nowej linii */
 .switch-group {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
     padding: 0.5rem 0;
+    margin-bottom: 1rem;
 }
 
 .switch-label {
-    margin-right: 1rem;
+    margin-bottom: 0.6rem;
+    color: var(--text-color);
+    font-weight: normal;
 }
 
 .switch {
     position: relative;
     display: inline-block;
-    width: 48px;
-    height: 24px;
+    width: 44px;
+    height: 22px;
 }
 
 .switch input {
@@ -268,20 +270,20 @@ button:disabled {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
-    transition: .4s;
-    border-radius: 24px;
+    background-color: #e0e0e0;
+    transition: .3s;
+    border-radius: 22px;
 }
 
 .slider:before {
     position: absolute;
     content: "";
-    height: 18px;
-    width: 18px;
+    height: 16px;
+    width: 16px;
     left: 3px;
     bottom: 3px;
     background-color: white;
-    transition: .4s;
+    transition: .3s;
     border-radius: 50%;
 }
 
@@ -290,10 +292,10 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-    transform: translateX(24px);
+    transform: translateX(22px);
 }
 
-/* Edytowalne pola */
+/* Edytowalne pola - stabilne przyciski bez efektów przesunięcia */
 .editable-field {
     position: relative;
     width: 100%;
@@ -309,35 +311,45 @@ input:checked + .slider:before {
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
-    background: transparent;
-    border: none;
-    box-shadow: none;
-    width: 30px;
-    height: 30px;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    width: 28px;
+    height: 28px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--secondary-color);
+    color: var(--text-muted);
     cursor: pointer;
-    transition: var(--transition);
     z-index: 2;
+    transition: none;
+    padding: 0 !important;
+    margin: 0 !important;
+    outline: none !important;
 }
 
 .edit-btn:hover, .add-btn:hover {
     color: var(--primary-color);
-    background: transparent;
-    transform: translateY(-50%) scale(1.1);
-    box-shadow: none;
 }
 
-/* Spinner */
+/* Wyłączenie wszystkich transformacji i efektów hover dla tych przycisków */
+.edit-btn:hover, .edit-btn:active, .edit-btn:focus,
+.add-btn:hover, .add-btn:active, .add-btn:focus {
+    transform: translateY(-50%) !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+    outline: none !important;
+}
+
+/* Spinner - delikatniejszy */
 .spinner {
-    width: 40px;
-    height: 40px;
-    border: 3px solid rgba(67, 97, 238, 0.2);
+    width: 36px;
+    height: 36px;
+    border: 2px solid rgba(67, 97, 238, 0.1);
     border-radius: 50%;
     border-top-color: var(--primary-color);
-    animation: spin 1s linear infinite;
+    animation: spin 0.8s linear infinite;
     margin: 1rem auto;
 }
 
@@ -346,7 +358,7 @@ input:checked + .slider:before {
     100% { transform: rotate(360deg); }
 }
 
-/* Komunikaty błędów */
+/* Komunikaty błędów - delikatniejsze */
 .error-message {
     color: var(--danger-color);
     font-size: 13px;
@@ -354,7 +366,7 @@ input:checked + .slider:before {
     text-align: center;
 }
 
-/* Listy */
+/* Listy - delikatniejsze */
 ul, ol {
     margin-left: 1.5rem;
     margin-bottom: 1rem;
@@ -362,114 +374,296 @@ ul, ol {
 
 li {
     margin-bottom: 0.5rem;
+    color: var(--text-color);
 }
 
-/* Przyciski i kontrolki na dole formularzy */
+/* Przyciski na dole formularzy i pojedyncze przyciski - wycentrowane */
 .button-container {
     display: flex;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.8rem;
     margin-top: 1.5rem;
 }
 
-/* Obsługa responsywności */
+/* Przycisk generowania zawsze wycentrowany */
+#send-request {
+    display: block !important;
+    margin: 0 auto !important;
+    text-align: center;
+}
+
 @media (max-width: 600px) {
     .button-container {
         flex-direction: column;
     }
 }
 
-/* Tłumaczenie i kontekst */
+/* Tłumaczenie i kontekst - delikatniejsze */
 #translation-container, #context-container {
     margin-top: 1rem;
     border-top: 1px solid var(--border-color);
     padding-top: 1rem;
 }
 
-#translation-controls {
+/* Styl dla przycisku tłumaczenia z nową ikoną */
+#translate-btn, #result-translate-btn {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    margin-bottom: 1rem;
+    gap: 8px;
+    background-color: var(--secondary-light);
+    color: var(--text-color);
+    border: 1px solid var(--border-color);
+    padding: 8px 14px;
+    font-size: 13px;
+    font-weight: normal;
 }
 
-/* Profile kandydata - instrukcja */
+#translate-btn i, #result-translate-btn i {
+    font-size: 16px;
+    color: var(--primary-color);
+}
+
+/* Profile kandydata - delikatniejsza instrukcja */
 #instructions-container {
     font-size: 14px;
     line-height: 1.6;
 }
 
 #instructions-container h3 {
-    margin-bottom: 1rem;
+    margin-top: 1.2rem;
+    margin-bottom: 0.8rem;
     color: var(--primary-color);
-    font-weight: 600;
+    font-weight: 500;
+    font-size: 16px;
 }
 
 #instructions-container ol {
     margin-left: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.3rem;
 }
 
 #instructions-container li {
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.7rem;
+    color: var(--text-color);
 }
 
 #instructions-container strong {
     color: var(--primary-color);
+    font-weight: 500;
 }
 
-/* Dodatkowe style dla SMS sender */
-#recipient-phones-container {
-    width: 100%;
-}
-
-.recipient-field {
-    margin-bottom: 0.5rem;
-}
-
-/* Dodatkowe style dla panelu logowania */
-.login-header {
-    text-align: center;
+#instructions-container button {
+    margin-top: 1rem;
     margin-bottom: 1.5rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.logo-container {
-    width: 70px;
-    height: 70px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
+/* Section header - delikatniejszy */
+.section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.5rem;
+}
+
+.section-icon {
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 1rem;
-    color: white;
-    font-size: 28px;
+    margin-right: 12px;
+    border-radius: 10px;
+    font-size: 18px;
+    background-color: var(--primary-light);
+    color: var(--primary-color);
 }
 
-.login-subtitle {
-    color: var(--secondary-color);
+.section-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-bottom: 2px;
+}
+
+.section-subtitle {
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+/* Karty - delikatniejsze */
+/* Style dla obszarów formularzy - zastępują karty */
+.form-section {
+    padding: 1.2rem 0;
     margin-bottom: 1rem;
-    font-size: 14px;
+    border-bottom: 1px solid var(--border-color);
 }
 
-.input-icon-wrapper {
-    position: relative;
-    width: 100%;
+.form-section:last-child {
+    border-bottom: none;
 }
 
-.input-icon-wrapper i {
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: var(--secondary-color);
+.form-title {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
 }
 
-.input-icon-wrapper input {
-    padding-left: 40px;
+.form-title i {
+    margin-right: 8px;
+    color: var(--primary-color);
 }
 
-/* Animowane ekrany powitalne */
+.form-content {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Alerty - delikatniejsze */
+.alert {
+    padding: 0.8rem 1rem;
+    border-radius: var(--border-radius);
+    margin: 0.8rem 0;
+    display: flex;
+    align-items: flex-start;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.alert i {
+    margin-right: 10px;
+    font-size: 16px;
+    margin-top: 1px;
+}
+
+.alert-success {
+    background-color: var(--success-light);
+    color: #155724;
+    border-left: 3px solid var(--success-color);
+}
+
+.alert-warning {
+    background-color: var(--warning-light);
+    color: #856404;
+    border-left: 3px solid var(--warning-color);
+}
+
+.alert-danger {
+    background-color: var(--danger-light);
+    color: #721c24;
+    border-left: 3px solid var(--danger-color);
+}
+
+.alert-info {
+    background-color: var(--primary-light);
+    color: #0c5460;
+    border-left: 3px solid var(--primary-color);
+}
+
+/* Wiadomości - delikatniejsze */
+.message-preview {
+    background-color: white;
+    border-radius: var(--border-radius);
+    padding: 1.2rem;
+    margin: 1rem 0;
+    border-left: 3px solid var(--primary-color);
+    box-shadow: var(--shadow-sm);
+}
+
+.message-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.message-icon {
+    width: 30px;
+    height: 30px;
+    background-color: var(--primary-light);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.message-title {
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--text-color);
+}
+
+.message-content {
+    line-height: 1.6;
+    color: var(--text-color);
+    font-size: 13px;
+}
+
+/* Animowane powiadomienia - delikatniejsze */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 14px;
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    z-index: 10000;
+    font-size: 13px;
+    max-width: 300px;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.notification i {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+.notification-info {
+    border-left: 3px solid var(--primary-color);
+}
+
+.notification-info i {
+    color: var(--primary-color);
+}
+
+.notification-success {
+    border-left: 3px solid var(--success-color);
+}
+
+.notification-success i {
+    color: var(--success-color);
+}
+
+.notification-warning {
+    border-left: 3px solid var(--warning-color);
+}
+
+.notification-warning i {
+    color: var(--warning-color);
+}
+
+.notification-error {
+    border-left: 3px solid var(--danger-color);
+}
+
+.notification-error i {
+    color: var(--danger-color);
+}
+
+/* Ekran powitalny - bardziej delikatny */
 .welcome-screen {
     text-align: center;
     padding: 2rem;
@@ -482,396 +676,47 @@ li {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
+    from { opacity: 0; transform: translateY(5px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 .welcome-icon {
-    width: 80px;
-    height: 80px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
+    width: 70px;
+    height: 70px;
+    background-color: var(--primary-light);
+    border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 1.5rem;
-    color: white;
-    font-size: 32px;
-    animation: pulse 2s infinite;
+    margin-bottom: 1.3rem;
+    color: var(--primary-color);
+    font-size: 28px;
+    animation: pulse 3s infinite;
 }
 
 @keyframes pulse {
     0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+    50% { transform: scale(1.03); }
     100% { transform: scale(1); }
 }
 
 .welcome-screen h2 {
     color: var(--text-color);
-    margin-bottom: 1rem;
-    font-weight: 600;
+    margin-bottom: 0.8rem;
+    font-weight: 500;
 }
 
 .welcome-screen p {
-    color: var(--secondary-color);
-    font-size: 16px;
+    color: var(--text-muted);
+    font-size: 15px;
 }
 
-/* Ulepszenia dla ekranu uploader plików */
-.upload-zone {
-    border: 2px dashed var(--border-color);
-    border-radius: var(--border-radius);
-    padding: 2rem;
-    text-align: center;
-    margin: 1rem 0;
-    background-color: #f8faff;
-    transition: var(--transition);
-    cursor: pointer;
-}
-
-.upload-zone:hover {
-    border-color: var(--primary-color);
-    background-color: #f0f7ff;
-}
-
-.upload-icon {
-    font-size: 40px;
-    color: var(--primary-color);
-    margin-bottom: 1rem;
-}
-
-.upload-text {
-    color: var(--secondary-color);
-    margin-bottom: 1rem;
-}
-
-.upload-formats {
-    font-size: 12px;
-    color: var(--secondary-color);
-}
-
-/* Ulepszenia dla SMS i maili */
-.message-preview {
-    background-color: white;
-    border-radius: var(--border-radius);
-    padding: 1.5rem;
-    margin: 1rem 0;
-    border-left: 4px solid var(--primary-color);
-    box-shadow: var(--shadow-sm);
-}
-
-.message-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.message-icon {
-    width: 32px;
-    height: 32px;
-    background-color: #f0f7ff;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-right: 10px;
-    color: var(--primary-color);
-}
-
-.message-title {
-    font-weight: 600;
-    font-size: 16px;
-}
-
-.message-content {
-    line-height: 1.6;
-    color: var(--text-color);
-}
-
-/* Ulepszenia dla alertów */
-.alert {
-    padding: 1rem;
-    border-radius: var(--border-radius);
-    margin: 1rem 0;
-    display: flex;
-    align-items: flex-start;
-}
-
-.alert-icon {
-    margin-right: 10px;
-    font-size: 18px;
-}
-
-.alert-success {
-    background-color: #d4edda;
-    color: #155724;
-    border-left: 4px solid #28a745;
-}
-
-.alert-warning {
-    background-color: #fff3cd;
-    color: #856404;
-    border-left: 4px solid #ffc107;
-}
-
-.alert-danger {
-    background-color: #f8d7da;
-    color: #721c24;
-    border-left: 4px solid #dc3545;
-}
-
-.alert-info {
-    background-color: #d1ecf1;
-    color: #0c5460;
-    border-left: 4px solid #17a2b8;
-}
-
-/* Statusy UI dla elementów SMS */
-.status-badge {
-    display: inline-block;
-    padding: 0.25rem 0.5rem;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    text-align: center;
-}
-
-.status-success {
-    background-color: #d4edda;
-    color: #155724;
-}
-
-.status-pending {
-    background-color: #fff3cd;
-    color: #856404;
-}
-
-.status-error {
-    background-color: #f8d7da;
-    color: #721c24;
-}
-
-/* Hover efekty dla wszystkich elementów interaktywnych */
-.hover-effect {
-    transition: var(--transition);
-}
-
-.hover-effect:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-md);
-}
-
-/* Tooltips */
-.tooltip {
-    position: relative;
-    display: inline-block;
-}
-
-.tooltip .tooltip-text {
-    visibility: hidden;
-    width: 120px;
-    background-color: var(--dark-bg);
-    color: white;
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    font-size: 12px;
-}
-
-.tooltip:hover .tooltip-text {
-    visibility: visible;
-    opacity: 1;
-}
-
-/* System powiadomień */
-.notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    padding: 12px 16px;
-    background-color: white;
-    border-radius: var(--border-radius);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    display: flex;
-    align-items: center;
-    z-index: 10000;
-    font-size: 14px;
-    max-width: 300px;
-    opacity: 0;
-    transform: translateY(-20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.notification i {
-    margin-right: 10px;
-    font-size: 18px;
-}
-
-.notification-info {
-    border-left: 4px solid var(--primary-color);
-}
-
-.notification-info i {
-    color: var(--primary-color);
-}
-
-.notification-success {
-    border-left: 4px solid var(--success-color);
-}
-
-.notification-success i {
-    color: var(--success-color);
-}
-
-.notification-warning {
-    border-left: 4px solid var(--warning-color);
-}
-
-.notification-warning i {
-    color: var(--warning-color);
-}
-
-.notification-error {
-    border-left: 4px solid var(--danger-color);
-}
-
-.notification-error i {
-    color: var(--danger-color);
-}
-
-/* Header sekcji */
-.panel-header {
-    text-align: center;
-    margin-bottom: 2rem;
-}
-
-.panel-icon {
-    width: 64px;
-    height: 64px;
-    background-color: var(--primary-color);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto 1rem;
-    color: white;
-    font-size: 24px;
-}
-
-.panel-icon.success {
-    background-color: var(--success-color);
-}
-
-.panel-icon.warning {
-    background-color: var(--warning-color);
-}
-
-.panel-icon.error {
-    background-color: var(--danger-color);
-}
-
-.panel-header h2 {
-    color: var(--text-color);
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-}
-
-.panel-header p {
-    color: var(--secondary-color);
-    font-size: 14px;
-}
-
-/* Style dla tłumaczeń */
-.translation-form {
-    background-color: #f8faff;
-    padding: 1rem;
-    border-radius: var(--border-radius);
-    margin-top: 1rem;
-    border: 1px solid #e6effd;
-}
-
-.translation-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-    color: var(--primary-color);
-    font-weight: 500;
-}
-
-.translation-header i {
-    margin-right: 8px;
-    font-size: 16px;
-}
-
-.translation-result {
-    background-color: #f8faff;
-    padding: 1rem;
-    border-radius: var(--border-radius);
-    margin-top: 0.5rem;
-}
-
-.translation-content {
-    margin-top: 0.5rem;
-    line-height: 1.6;
-    font-size: 14px;
-}
-
-/* Przyciski dodatkowe */
-.btn-primary {
-    background-color: var(--primary-color);
-    color: white;
-}
-
-.btn-secondary {
-    background-color: #6c757d;
-    color: white;
-}
-
-.btn-success {
-    background-color: var(--success-color);
-    color: white;
-}
-
-.btn-warning {
-    background-color: var(--warning-color);
-    color: white;
-}
-
-.btn-danger {
-    background-color: var(--danger-color);
-    color: white;
-}
-
-/* Container procesowania */
-.processing-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    text-align: center;
-}
-
-.processing-container p {
-    margin: 1rem 0;
-    color: var(--text-color);
-    font-weight: 500;
-}
-
+/* Pasek postępu - delikatniejszy */
 .progress-bar {
     width: 100%;
-    height: 6px;
-    background-color: #e9ecef;
-    border-radius: 3px;
+    height: 5px;
+    background-color: var(--secondary-light);
+    border-radius: 2.5px;
     overflow: hidden;
     margin-top: 1rem;
 }
@@ -879,6 +724,75 @@ li {
 .progress-fill {
     height: 100%;
     background-color: var(--primary-color);
-    border-radius: 3px;
+    border-radius: 2.5px;
     width: 0%;
+}
+
+/* Container procesowania - delikatniejszy */
+.processing-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    text-align: center;
+}
+
+.processing-container p {
+    margin: 0.8rem 0;
+    color: var(--text-color);
+    font-weight: normal;
+}
+
+/* Specjalne style dla widoku SMS - zmniejszone pola i odstępy */
+#sms-form-container input,
+#sms-form-container select {
+    padding: 0.4rem 0.7rem;
+    margin-bottom: 0.4rem;
+    font-size: 13px;
+}
+
+#sms-form-container .form-group {
+    margin-bottom: 0.6rem;
+}
+
+#sms-form-container label {
+    margin-bottom: 0.2rem;
+    font-size: 13px;
+    display: block;
+}
+
+/* Zmniejszony odstęp w edytowalnych polach */
+#sms-form-container .editable-field {
+    margin-bottom: 0.3rem;
+}
+
+/* Zmniejszone odstępy dla pól odbiorców */
+#recipient-phones-container {
+    margin-top: 0.2rem;
+}
+
+#recipient-phones-container .recipient-field {
+    margin-bottom: 0.3rem;
+}
+
+/* Mniejsze wewnętrzne odstępy w podglądzie wiadomości */
+#template-preview {
+    padding: 0.7rem;
+    font-size: 13px;
+    margin-top: 0.2rem;
+    line-height: 1.4;
+}
+
+/* Zmniejszony odstęp przed podglądem */
+#sms-form-container .form-group:last-child p {
+    margin-bottom: 0.2rem;
+    margin-top: 0.4rem;
+}
+
+/* Mniejszy przycisk wysyłania */
+#sms-form-container .send-btn {
+    padding: 0.4rem 0.9rem;
+    font-size: 13px;
+    margin-top: 0.3rem;
 }

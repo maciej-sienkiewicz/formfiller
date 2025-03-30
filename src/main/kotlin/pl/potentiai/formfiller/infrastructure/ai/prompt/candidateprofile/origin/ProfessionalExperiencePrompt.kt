@@ -48,13 +48,14 @@ Zasady:
 3. **"city"**: Miasto w którym była wykonywana praca 
 4. **"country"**: Jeśli jest bezpośrednio podany kraj: wstaw wartość. Inaczej jeśli jest wskazane miasto wyszukaj kraj gdzie znajduje się to miasto i wstaw w języku polskim.
 5. **"company"**: Nazwa firmy.
-6. **"profession"**: Wartość MUSI być wzięta z listy przesłanej poniżej. Lista będzie oznaczona w tagach <list></list>. Dobierz tylko jedną najtrafniejszą wartość.
-7. **professionDe"**: Wykonywany zawód dla tego okresu czasu - w języku niemieckim
-7. **professionEng"**: Wykonywany zawód dla tego okresu czasu - w języku angielskim
-8. **"experienceTask"**: Lista zadań opisanych w pracy, np. obowiązki, projekty. Dla każdego zadania utwórz osobny obiekt z polem "name".
-9. Jeśli w tekście brakuje informacji o dacie, kraju, mieście lub zadaniach, zostaw puste wartości dla tych pól.
-10. Nie dodawaj żadnych dodatkowych informacji, opisów ani znaków poza oczekiwanym JSON.
-11. Upewnij się, że pole **profession** nie jest puste i zostało wybrane z listy. 
+6. **profession**: Najpierw przetłumacz wartość na jezyk polski
+7. **"profession"**: Wartość MUSI być wzięta z listy przesłanej poniżej. Lista będzie oznaczona w tagach <list></list>. Dobierz tylko jedną najtrafniejszą wartość.
+8. **professionDe"**: Wykonywany zawód dla tego okresu czasu - w języku niemieckim
+9. **professionEng"**: Wykonywany zawód dla tego okresu czasu - w języku angielskim
+10. **"experienceTask"**: Lista zadań opisanych w pracy, np. obowiązki, projekty. Dla każdego zadania utwórz osobny obiekt z polem "name".
+11. Jeśli w tekście brakuje informacji o dacie, kraju, mieście lub zadaniach, zostaw puste wartości dla tych pól.
+12. Nie dodawaj żadnych dodatkowych informacji, opisów ani znaków poza oczekiwanym JSON.
+13. Upewnij się, że pole **profession** nie jest puste i zostało wybrane z listy. 
 
 Dostępna lista wartości dla "profession":
 <list>

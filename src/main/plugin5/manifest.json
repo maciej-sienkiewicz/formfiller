@@ -10,7 +10,7 @@
   },
   "permissions": ["activeTab", "scripting", "tabs", "storage"],
   "host_permissions": [
-    "http://localhost:20266/*"
+    "https://potentai.pl/*"
   ],
   "action": {
     "default_title": "Pokaż/Ukryj Potent(AI)",

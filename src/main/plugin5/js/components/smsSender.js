@@ -197,7 +197,7 @@ if (smsSenderButton) {
                 });
 
                 // Pobieranie szablonów SMS.
-                fetch("http://localhost:20266/api/form-filler/sms/templates", {
+                fetch("https://potentai.pl/api/form-filler/sms/templates", {
                     headers: {"Authorization": `Bearer ${token}`},
                 })
                     .then(response => response.json())
@@ -381,7 +381,7 @@ if (smsSenderButton) {
                     UI.updateContent(`<div id="loading-spinner" class="spinner"></div>`);
 
                     try {
-                        const response = await fetch("http://localhost:20266/api/form-filler/sms/send", {
+                        const response = await fetch("https://potentai.pl/api/form-filler/sms/send", {
                             method: "POST",
                             headers: {"Content-Type": "application/json", "Authorization": `Bearer ${token}`},
                             body: JSON.stringify({

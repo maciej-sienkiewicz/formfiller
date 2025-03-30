@@ -16,7 +16,7 @@ candidateProfileButton.addEventListener("click", () => {
 
 function showUploadInterface() {
     UI.updateContent(`
-        <div id="instructions-container">
+        <div id="instructions-container" class="form-section">
             <div class="section-header">
                 <div class="section-icon">
                     <i class="fa-solid fa-user-tie"></i>
@@ -155,7 +155,7 @@ async function uploadFile(file, token) {
     const formData = new FormData();
     formData.append("file", file);
 
-    const response = await fetch("http://localhost:20266/api/form-filler/upload", {
+    const response = await fetch("https://potentai.pl/api/form-filler/upload", {
         method: "POST",
         body: formData,
         headers: { "Authorization": `Bearer ${token}` },
@@ -438,7 +438,7 @@ async function processFormData(data, token) {
 
 async function updateStats(token) {
     try {
-        const response = await fetch("http://localhost:20266/api/form-filler/stats", {
+        const response = await fetch("https://potentai.pl/api/form-filler/stats", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
